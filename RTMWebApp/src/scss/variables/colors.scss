@@ -1,0 +1,53 @@
+// Main
+$primary: #0D2188; // Primary color company
+$primary-light: adjust-color($primary, $lightness: 10%);
+$primary-dark: adjust-color($primary, $lightness: -10%);
+$secondary: #4BA3C3; // Secondary color company
+$secondary-light: adjust-color($secondary, $lightness: 10%);
+$secondary-dark: adjust-color($secondary, $lightness: -10%);
+
+// Whites
+$white: #fff;
+$white-20: #fafafa;
+$white-40: #f7f7f7; // Body background
+$white-60: #eaeaea; // Borders color
+$white-80: #dadada;
+
+
+// Greys
+$grey: #adb5bd; // Text muted
+$grey-20: #999;
+$grey-40: #808080;
+$grey-60: #666;
+$grey-80: #444;
+
+
+// Blacks
+$black-20: #333;
+$black-40: #2b2b2b; // Standard text & headings
+$black-60: #1b1b1b;
+$black-80: #111;
+$black: #000;
+
+
+// System
+$red: #d51a14; // Error messages
+$red-bg: adjust-color($red, $lightness: 90%);
+$red-light: adjust-color($red, $lightness: 10%);
+$red-dark: adjust-color($red, $lightness: -10%);
+$orange: #e88800; // Alert messages
+$orange-bg: adjust-color($orange, $lightness: 90%);
+$orange-light: adjust-color($orange, $lightness: 10%);
+$orange-dark: adjust-color($orange, $lightness: -10%);
+$yellow: #ffd700; // Pending messages
+$yellow-bg: adjust-color($yellow, $lightness: 90%);
+$yellow-light: adjust-color($yellow, $lightness: 10%);
+$yellow-dark: adjust-color($yellow, $lightness: -10%);
+$green: #14b100;  // Success messages, buttons
+$green-bg: adjust-color($green, $lightness: 90%);
+$green-light: adjust-color($green, $lightness: 10%);
+$green-dark: adjust-color($green, $lightness: -10%);
+$blue: #1c50dd; // Info messages
+$blue-bg: adjust-color($blue, $lightness: 90%);
+$blue-light: adjust-color($blue, $lightness: 10%);
+$blue-dark: adjust-color($blue, $lightness: -10%);
