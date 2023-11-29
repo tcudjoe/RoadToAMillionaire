@@ -3,6 +3,7 @@ package hibera.api.rtmwebappapi.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -50,12 +51,20 @@ public class SecurityConfig extends AbstractHttpConfigurer<SecurityConfig, HttpS
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logout ->
                         logout.logoutUrl("/api/v1/auth/logout")
-                        .addLogoutHandler(logoutHandler)
-                        .logoutSuccessHandler(
-                                (request, response, authentication) ->
-                                        SecurityContextHolder.clearContext()
-                        )
-                );
+                                .addLogoutHandler(logoutHandler)
+                                .logoutSuccessHandler(
+                                        (request, response, authentication) ->
+                                                SecurityContextHolder.clearContext()
+                                )
+                )
+                .oauth2Login(Customizer.withDefaults()
+//                        oauth2 ->
+//                        oauth2
+//                                .loginPage("/login") // Specify a custom login page
+//                                .userInfoEndpoint()
+//                                .userService(oauth2UserService) // Implement your custom OAuth2UserService
+                )
+        ;
 
 
         return http.build();
