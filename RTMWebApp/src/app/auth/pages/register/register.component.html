@@ -1,0 +1,47 @@
+<div class="container" *ngIf="!authResponse.mfaEnabled">
+  <div class="row">
+    <div class="col-12">
+      <h2>Register</h2>
+      <form (ngSubmit)="registerUser()">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">First name</label>
+          <input type="text" class="form-control" id="exampleInputFirstname1" aria-describedby="FirstnameHelp" name="firstName" [(ngModel)]="registerRequest.firstName">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputSurname1" class="form-label">Surname</label>
+          <input type="text" class="form-control" id="exampleInputSurname1" name="lastName" [(ngModel)]="registerRequest.lastName">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" [(ngModel)]="registerRequest.email">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" name="password" [(ngModel)]="registerRequest.password">
+        </div>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="mfaEnabled" [(ngModel)]="registerRequest.mfaEnabled">
+          <label class="form-check-label" for="flexSwitchCheckDefault">Enable MFA (Multi Factor Authentication)</label>
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary">Register</button>
+        <br>
+        <a [routerLink]="'../login'">Have an account already? Login</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="authResponse.mfaEnabled">
+  <div class="row">
+    <h2>Setup Multi Factor Authentication</h2>
+    <div class="col-12">
+      <div class="qr-code">
+        <img [src]="authResponse.secretImageUri" alt="Qr Code for MFA">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputQrcode1" class="form-label">Fill in the 6-digit number:</label>
+        <input type="number" class="form-control" id="exampleInputQrcode1" aria-describedby="qrCodeHelp" name="validationCode" required>
+      </div>
+    </div>
+  </div>
+</div>

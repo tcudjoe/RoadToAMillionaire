@@ -5,12 +5,12 @@ import {PageNotFoundComponent} from "./shared/pages/page-not-found/page-not-foun
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: '/home',
     pathMatch: 'full',
     title: 'Road to a Millionaire | Home',
   },
   {
-    path: '',
+    path: 'auth',
     loadChildren: () =>
       import('./auth/auth.module').then((m) => m.AuthModule),
   },

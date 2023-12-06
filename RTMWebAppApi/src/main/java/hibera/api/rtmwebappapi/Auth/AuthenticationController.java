@@ -1,6 +1,7 @@
 package hibera.api.rtmwebappapi.Auth;
 
 import hibera.api.rtmwebappapi.Auth.service.AuthenticationService;
+import hibera.api.rtmwebappapi.Auth.service.VerificationRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,14 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
     ) {
-        System.out.println("User registration successful");
-        return ResponseEntity.ok(service.register(request)) ;
+        var response = service.register(request);
+        if (request.isMfaEnabled()) {
+            System.out.println("User registration successful with MFA enabled");
+            return ResponseEntity.ok(service.register(request));
+        }
+        System.out.println("User registration successful without MFA enabled");
+        return ResponseEntity.accepted().build();
+
     }
 
     @PostMapping("/authenticate")
@@ -31,7 +38,7 @@ public class AuthenticationController {
             @RequestBody AuthenticationRequest request
     ) {
         System.out.println("User authentication successful");
-        return ResponseEntity.ok(service.authenticate(request)) ;
+        return ResponseEntity.ok(service.authenticate(request));
     }
 
     @PostMapping("/refresh-token")
@@ -40,6 +47,13 @@ public class AuthenticationController {
             HttpServletResponse response
     ) throws IOException {
         System.out.println("User token refresh successful");
-        service.refreshToken(request, response) ;
+        service.refreshToken(request, response);
+    }
+
+    @PostMapping("/verify")
+    public ResponseEntity<?> verifyCode(
+            @RequestBody VerificationRequest verificationRequest
+    ){
+        return ResponseEntity.ok(service.verifyCode(verificationRequest));
     }
 }
