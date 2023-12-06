@@ -32,15 +32,15 @@ public class RtmWebAppApiApplication {
 //					.role(ADMIN)
 //					.build();
 //			System.out.println("Admin token: " + service.register(admin).getAccessToken());
-
-			var manager = RegisterRequest.builder()
-					.firstName("Malcolm")
-					.lastName("Cudjoe")
-					.email("manager@roadtoamillionaire.com")
-					.password("test1234")
-					.role(MANAGER)
-					.build();
-			System.out.println("Manager token: " + service.register(manager).getAccessToken());
+//
+//			var manager = RegisterRequest.builder()
+//					.firstName("Malcolm")
+//					.lastName("Cudjoe")
+//					.email("manager@roadtoamillionaire.com")
+//					.password("test1234")
+//					.role(MANAGER)
+//					.build();
+//			System.out.println("Manager token: " + service.register(manager).getAccessToken());
 //
 //			var user = RegisterRequest.builder()
 //					.firstName("Albert")
