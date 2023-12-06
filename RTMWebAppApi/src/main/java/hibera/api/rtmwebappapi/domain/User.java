@@ -22,19 +22,12 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
     private String username;
-    @Column
     private String email;
-    @Column
     private String password;
-    @Column
     private String firstName;
-    @Column
     private String lastName;
-    @Column
     private Boolean mfaEnabled;
-    @Column
     private String secret;
     @Enumerated(EnumType.STRING)
     private Role role;

@@ -24,23 +24,23 @@ public class RtmWebAppApiApplication {
 	){
 
 		return args -> {
-			var admin = RegisterRequest.builder()
-					.firstName("Tyra")
-					.lastName("Cudjoe")
-					.email("admin@roadtoamillionaire.com")
-					.password("test1234")
-					.role(ADMIN)
-					.build();
-			System.out.println("Admin token: " + service.register(admin).getAccessToken());
-
-//			var manager = RegisterRequest.builder()
-//					.firstName("Malcolm")
+//			var admin = RegisterRequest.builder()
+//					.firstName("Tyra")
 //					.lastName("Cudjoe")
-//					.email("manager@roadtoamillionaire.com")
+//					.email("admin@roadtoamillionaire.com")
 //					.password("test1234")
-//					.role(MANAGER)
+//					.role(ADMIN)
 //					.build();
-//			System.out.println("Manager token: " + service.register(manager).getAccessToken());
+//			System.out.println("Admin token: " + service.register(admin).getAccessToken());
+
+			var manager = RegisterRequest.builder()
+					.firstName("Malcolm")
+					.lastName("Cudjoe")
+					.email("manager@roadtoamillionaire.com")
+					.password("test1234")
+					.role(MANAGER)
+					.build();
+			System.out.println("Manager token: " + service.register(manager).getAccessToken());
 //
 //			var user = RegisterRequest.builder()
 //					.firstName("Albert")

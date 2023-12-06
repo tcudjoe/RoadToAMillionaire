@@ -35,11 +35,6 @@ public class SecurityConfig extends AbstractHttpConfigurer<SecurityConfig, HttpS
     private final LogoutHandler logoutHandler;
 
     @Bean
-    MvcRequestMatcher.Builder mvc(HandlerMappingIntrospector introspector) {
-        return new MvcRequestMatcher.Builder(introspector);
-    }
-
-    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
         MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
         http
@@ -49,10 +44,6 @@ public class SecurityConfig extends AbstractHttpConfigurer<SecurityConfig, HttpS
                                 .permitAll()
 
                                 .requestMatchers(mvcMatcherBuilder.pattern("/localhost:8080/api/v1/admin/**")).hasRole(ADMIN.name())
-//                                .requestMatchers(new AntPathRequestMatcher("/api/v1/admin/**")).hasRole(ADMIN.name())
-//                                .requestMatchers(new AntPathRequestMatcher("/api/v1/management/**")).hasAnyRole(ADMIN.name(), MANAGER.name())
-//                                .requestMatchers(new AntPathRequestMatcher("/api/v1/user/**")).hasAnyRole(ADMIN.name(), MANAGER.name(), USER.name())
-
                                 .requestMatchers(mvcMatcherBuilder.pattern(GET, "/api/v1/admin/**")).hasAuthority(ADMIN_READ.name())
                                 .requestMatchers(mvcMatcherBuilder.pattern(POST, "/api/v1/admin/**")).hasAuthority(ADMIN_CREATE.name())
                                 .requestMatchers(mvcMatcherBuilder.pattern(PUT, "/api/v1/admin/**")).hasAuthority(ADMIN_UPDATE.name())

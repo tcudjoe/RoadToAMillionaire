@@ -40,12 +40,13 @@ public class AuthenticationService {
                 .role(request.getRole())
                 .build();
 
+        System.out.println("Role assigned to the user: " + request.getRole());
 
         var savedUser = userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
 
-        revokeAllUserTokens(user);
+//        revokeAllUserTokens(user);
         saveUserToken(savedUser, jwtToken);
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)

@@ -1,7 +1,9 @@
 package hibera.api.rtmwebappapi.domain;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+@Getter
 @RequiredArgsConstructor
 public enum Permissions {
     ADMIN_READ("admin:read"),
