@@ -7,7 +7,7 @@ const routes: Routes = [{
   path: '', component: LayoutComponent,
   children: [
     {
-      path: 'home',
+      path: 'dashboard',
       component: HomeComponent,
       title: 'RTM | Dashboard'
 
