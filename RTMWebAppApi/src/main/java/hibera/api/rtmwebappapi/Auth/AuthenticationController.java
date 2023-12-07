@@ -26,7 +26,7 @@ public class AuthenticationController {
         var response = service.register(request);
         if (request.isMfaEnabled()) {
             System.out.println("User registration successful with MFA enabled");
-            return ResponseEntity.ok(service.register(request));
+            return ResponseEntity.ok(response);
         }
         System.out.println("User registration successful without MFA enabled");
         return ResponseEntity.accepted().build();
