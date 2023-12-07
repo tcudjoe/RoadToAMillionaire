@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { RegisterRequest } from "../../models/registerRequest/register-request";
-import { AuthenticationResponse } from "../../models/authentication-response/authentication-response";
-import { VerificationRequest } from "../../models/verificationRequest/verification-request";
-import { AuthenticationService } from "../../services/authentication/authentication.service";
-import { Router } from "@angular/router";
+import {Component} from '@angular/core';
+import {RegisterRequest} from "../../models/registerRequest/register-request";
+import {AuthenticationResponse} from "../../models/authentication-response/authentication-response";
+import {VerificationRequest} from "../../models/verificationRequest/verification-request";
+import {AuthenticationService} from "../../services/authentication/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -19,7 +19,8 @@ export class RegisterComponent {
   constructor(
     private authService: AuthenticationService,
     private router: Router
-  ) {}
+  ) {
+  }
 
   registerUser() {
     this.message = '';
@@ -54,7 +55,15 @@ export class RegisterComponent {
         this.message = 'Account created successfully!\n You will be redirected to the home page.';
         setTimeout(() => {
           localStorage.setItem('token', response.accessToken as string);
-          this.router.navigate(['/client/dashboard']);
+          if (this.registerRequest.role == 'USER') {
+            this.router.navigate(['/client/dashboard']);
+          }else if (this.registerRequest.role == 'ADMIN'){
+            this.router.navigate(['/admin/dashboard'])
+          }else if (this.registerRequest.role == 'MANAGER'){
+            this.router.navigate(['/manager/dashboard'])
+          }else {
+            this.router.navigate(['/home'])
+          }
         }, 3000);
       },
       error: (error) => {
