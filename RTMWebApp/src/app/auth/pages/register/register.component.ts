@@ -52,18 +52,10 @@ export class RegisterComponent {
     this.authService.verifyCode(verifyRequest).subscribe({
       next: (response) => {
         // Display success message and redirect to the home page after a delay
-        this.message = 'Account created successfully!\n You will be redirected to the home page.';
+        this.message = 'Account created successfully!\n You will be redirected to the login page.';
         setTimeout(() => {
           localStorage.setItem('token', response.accessToken as string);
-          if (this.registerRequest.role == 'USER') {
-            this.router.navigate(['/client/dashboard']);
-          }else if (this.registerRequest.role == 'ADMIN'){
-            this.router.navigate(['/admin/dashboard'])
-          }else if (this.registerRequest.role == 'MANAGER'){
-            this.router.navigate(['/manager/dashboard'])
-          }else {
-            this.router.navigate(['/home'])
-          }
+          this.router.navigate(['/auth/login']);
         }, 3000);
       },
       error: (error) => {
