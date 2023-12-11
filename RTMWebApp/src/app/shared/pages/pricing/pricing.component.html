@@ -1,0 +1,186 @@
+<div class="main">
+  <app-shared-navbar></app-shared-navbar>
+
+  <div class="container">
+    <div class="row">
+      <div class="intro">
+        <h5>Our Pricing</h5>
+        <h1>Start doing your vat checks</h1>
+        <h1>For Free</h1>
+        <p>get started with the Vatworkx platform to make use of our innovative, efficient, and accurate
+          platform</p>
+        <p>no bank account, no creditcard needed!</p>
+
+        <div class="switch-wrapper">
+          <input (change)="switchInputChanged('monthly')" [checked]="selectedSwitch === 'monthly'"
+                 id="monthly" name="switch" type="radio">
+          <input (change)="switchInputChanged('yearly')" [checked]="selectedSwitch === 'yearly'" id="yearly"
+                 name="switch" type="radio">
+          <label for="monthly">Monthly</label>
+          <label for="yearly">Yearly</label>
+          <span class="highlighter"></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="row">
+        <div class="col-3">
+          <div class="card">
+            <div class="card-body">
+              <h1>FREE</h1>
+              <small>Great to start.</small>
+              <h3 [class.hide]="selectedSwitch !== 'monthly'" class="price monthly">€0
+                <span>/ month</span>
+              </h3>
+              <h3 [class.hide]="selectedSwitch !== 'yearly'" class="price yearly hide">€0
+                <span>/ month</span>
+              </h3>
+              <br>
+              <button class="btn">Start with Free</button>
+              <hr>
+              <ul>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> 500 VAT Numbers <u>per day</u>
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 2
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 3
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 4
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 5
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 6
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 7
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card">
+            <div class="card-body">
+              <h1>STARTER</h1>
+              <small>Best for small companies</small>
+              <h3 [class.hide]="selectedSwitch !== 'monthly'" class="price monthly">€299
+                <span>/ month</span>
+              </h3>
+              <h3 [class.hide]="selectedSwitch !== 'yearly'" class="price yearly hide">€279
+                <span>/ month</span>
+              </h3>
+              <br>
+              <button class="btn">Select Starter</button>
+              <hr>
+              <ul>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> 250 VAT Numbers per check
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 2
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 3
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 4
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 5
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 6
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 7
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card">
+            <div class="card-body">
+              <h1>Pro <span class="badge">Popular</span></h1>
+              <small>Great to start.</small>
+              <h3 [class.hide]="selectedSwitch !== 'monthly'" class="price monthly">€599
+                <span>/ month</span>
+              </h3>
+              <h3 [class.hide]="selectedSwitch !== 'yearly'" class="price yearly hide">€579
+                <span>/ month</span></h3>
+              <br>
+              <button class="btn">Select Pro</button>
+              <hr>
+              <ul>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> 1000 VAT Numbers per check
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 2
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 3
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 4
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 5
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 6
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 7
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card">
+            <div class="card-body">
+              <h1>Enterprise</h1>
+              <small>For Big Enterprises</small>
+              <h3><u>Contact us</u></h3>
+              <br>
+              <button class="btn">Contact us</button>
+              <hr>
+              <ul>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> Unlimited VAT Numbers per check
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 2
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 3
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 4
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 5
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 6
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> test 7
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-call-to-action></app-call-to-action>
+</div>

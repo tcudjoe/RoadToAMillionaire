@@ -7,6 +7,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { PricingComponent } from './pages/pricing/pricing.component';
+import { SharedNavbarComponent } from './components/shared-navbar/shared-navbar.component';
+import { CallToActionComponent } from './components/call-to-action/call-to-action.component';
 
 
 @NgModule({
@@ -15,7 +18,10 @@ import { FooterComponent } from './components/footer/footer.component';
     HomeComponent,
     LayoutComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    PricingComponent,
+    SharedNavbarComponent,
+    CallToActionComponent
   ],
   imports: [
     CommonModule,

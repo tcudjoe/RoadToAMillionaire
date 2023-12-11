@@ -30,14 +30,14 @@ export class LoginComponent {
           if (!this.authResponse.mfaEnabled) {
             localStorage.setItem('token', response.accessToken as string)
 
-            if (this.authenticationRequest.role == 'USER') {
+            if (this.authenticationRequest.role === 'USER') {
               this.router.navigate(['/client/dashboard']);
-            } else if (this.authenticationRequest.role == 'ADMIN') {
+            } else if (this.authenticationRequest.role === 'ADMIN') {
               this.router.navigate(['/admin/dashboard'])
-            } else if (this.authenticationRequest.role == 'MANAGER') {
+            } else if (this.authenticationRequest.role === 'MANAGER') {
               this.router.navigate(['/manager/dashboard'])
             } else {
-              this.router.navigate(['/home'])
+              this.router.navigate(['/client/dashboard']);
             }
           }
         }
@@ -51,21 +51,19 @@ export class LoginComponent {
     };
     this.authService.verifyCode(verifyRequest).subscribe({
       next: (response) => {
-        // Display success message and redirect to the home page after a delay
         setTimeout(() => {
           localStorage.setItem('token', response.accessToken as string);
-          if (this.authenticationRequest.role == 'USER') {
+          if (this.authenticationRequest.role === 'USER') {
             this.router.navigate(['/client/dashboard']);
-          } else if (this.authenticationRequest.role == 'ADMIN') {
+          } else if (this.authenticationRequest.role === 'ADMIN') {
             this.router.navigate(['/admin/dashboard'])
-          } else if (this.authenticationRequest.role == 'MANAGER') {
+          } else if (this.authenticationRequest.role === 'MANAGER') {
             this.router.navigate(['/manager/dashboard'])
           } else {
-            this.router.navigate(['/home'])
+            this.router.navigate(['/client/dashboard']);
           }
         });
       },
-
     });
   }
 }
