@@ -1,0 +1,72 @@
+<div *ngIf="authResponse && !message" class="toast" aria-atomic="true" aria-live="assertive" role="alert">
+  <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>
+  <div class="toast-body">
+    {{ authResponse.mfaEnabled ? 'Multi Factor Authentication enabled successfully!' : 'Account created successfully! You will be redirected to the login page.' }}
+  </div>
+</div>
+
+<!-- Toaster for error message -->
+<div *ngIf="message" class="toast" aria-atomic="true" aria-live="assertive" role="alert">
+  <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>
+  <div class="toast-body">
+    {{ message }}
+  </div>
+</div>
+
+<div *ngIf="!authResponse.mfaEnabled" class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2>Register</h2>
+      <form (ngSubmit)="registerUser()">
+        <div class="mb-3">
+          <label class="form-label" for="exampleInputEmail1">First name</label>
+          <input [(ngModel)]="registerRequest.firstName" aria-describedby="FirstnameHelp" class="form-control"
+                 id="exampleInputFirstname1"
+                 name="firstName" type="text">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="exampleInputSurname1">Surname</label>
+          <input [(ngModel)]="registerRequest.lastName" class="form-control" id="exampleInputSurname1" name="lastName"
+                 type="text">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="exampleInputEmail1">Email address</label>
+          <input [(ngModel)]="registerRequest.email" aria-describedby="emailHelp" class="form-control"
+                 id="exampleInputEmail1" name="email"
+                 type="email">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="exampleInputPassword1">Password</label>
+          <input [(ngModel)]="registerRequest.password" class="form-control" id="exampleInputPassword1" name="password"
+                 type="password">
+        </div>
+        <div class="form-check form-switch">
+          <input [(ngModel)]="registerRequest.mfaEnabled" class="form-check-input" id="flexSwitchCheckDefault"
+                 name="mfaEnabled" role="switch"
+                 type="checkbox">
+          <label class="form-check-label" for="flexSwitchCheckDefault">Enable MFA (Multi Factor Authentication)</label>
+        </div>
+        <button class="btn btn-primary" name="submit" type="submit">Register</button>
+        <br>
+        <a [routerLink]="'../login'">Have an account already? Login</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="authResponse.mfaEnabled" class="container">
+  <div class="row">
+    <h2>Setup Multi Factor Authentication</h2>
+    <div class="col-12">
+      <div class="qr-code">
+        <img [src]="authResponse.secretImageUri" alt="Qr Code for MFA">
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="exampleInputQrcode1">Fill in the 6-digit number:</label>
+        <input [(ngModel)]="otpCode" aria-describedby="qrCodeHelp" class="form-control" id="exampleInputQrcode1"
+               name="validationCode" required type="number">
+        <button (click)="verifyTfa()" [class.button-disabled]="otpCode.length < 6" class="btn">Verify code</button>
+      </div>
+    </div>
+  </div>
+</div>

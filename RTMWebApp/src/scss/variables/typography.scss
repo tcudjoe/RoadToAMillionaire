@@ -1,0 +1,71 @@
+// Font Family
+$ff: 'Open Sans Hebrew', serif;
+
+// Headings modifiers
+$h-mod-0: 0;     // Desktop default
+$h-mod-1: .1rem;
+$h-mod-2: .2rem; // Responsive default
+$h-mod-3: .3rem;
+$h-mod-4: .4rem;
+$h-mod-5: .5rem;
+$h-mod-6: .6rem;
+
+// Headings
+$h1: 2rem;
+$h1-sm: ($h1 - $h-mod-2);
+$h1-md: ($h1 + $h-mod-0);
+$h1-xl: ($h1 + $h-mod-2);
+$h2: 1.8rem;
+$h2-sm: ($h2 - $h-mod-2);
+$h2-md: ($h2 + $h-mod-0);
+$h2-xl: ($h2 + $h-mod-2);
+$h3: 1.6rem;
+$h3-sm: ($h3 - $h-mod-2);
+$h3-md: ($h3 + $h-mod-0);
+$h3-xl: ($h3 + $h-mod-2);
+$h4: 1.4rem;
+$h4-sm: ($h4 - $h-mod-2);
+$h4-md: ($h4 + $h-mod-0);
+$h4-xl: ($h4 + $h-mod-2);
+$h5: 1.2rem;
+$h5-sm: ($h5 - $h-mod-2);
+$h5-md: ($h5 + $h-mod-0);
+$h5-xl: ($h5 + $h-mod-2);
+$h6: 1.1rem;
+$h6-sm: ($h6 - $h-mod-2);
+$h6-md: ($h6 + $h-mod-0);
+$h6-xl: ($h6 + $h-mod-2);
+
+// Font size
+$fs-xs: .7rem;
+$fs-sm: .8rem;
+$fs-md: .9rem;
+$fs: 1rem;
+$fs-lg: 1.1rem;
+$fs-xl: 1.2rem;
+$fs-xxl: 1.3rem;
+
+// Font weight
+$fw-200: 200;
+$fw-300: 300;
+$fw-400: 400;
+$fw-500: 500;
+$fw-600: 600;
+$fw-700: 700;
+
+// Line heights
+$lh-auto: auto;
+$lh-none: 0;
+$lh-xs: .5;
+$lh-sm: .7;
+$lh-md: .9;
+$lh: 1;
+$lh-lg: 1.2;
+$lh-xl: 1.4;
+$lh-xxl: 1.8;
+
+// Text transform
+$tt-upper: uppercase;
+$tt-lower: lowercase;
+$tt-cap: capitalize;
+$tt-reset: initial;
