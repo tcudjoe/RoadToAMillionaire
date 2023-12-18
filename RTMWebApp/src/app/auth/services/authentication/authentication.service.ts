@@ -21,7 +21,10 @@ export class AuthenticationService {
 
   login(authRequest: AuthenticationRequest){
     return this.http.post<AuthenticationResponse>(`${this.baseUrl}/authenticate`, authRequest)
+  }
 
+  logout(){
+    return this.http.post<void>(`${this.baseUrl}/logout`, {})
   }
 
   verifyCode(verificationRequest: VerificationRequest){

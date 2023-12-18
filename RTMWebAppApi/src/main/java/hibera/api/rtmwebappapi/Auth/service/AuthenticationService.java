@@ -20,10 +20,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +38,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final TokenRepository tokenRepository;
     private final TwoFactorAuthentication tfaService;
+    private final UserDetailsService userDetailsService;
 
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
@@ -41,7 +46,7 @@ public class AuthenticationService {
                 .lastName(request.getLastName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(request.getRole())
+                .role(Role.USER)
                 .mfaEnabled(request.isMfaEnabled())
                 .build();
 
@@ -55,7 +60,6 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
 
-//        revokeAllUserTokens(user);
         saveUserToken(savedUser, jwtToken);
         return AuthenticationResponse.builder()
                 .secretImageUri(tfaService.generateQrCodeImageUri(user.getSecret()))
@@ -76,24 +80,28 @@ public class AuthenticationService {
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
 
-        if (user.isMfaEnabled()){
+        if (user.isMfaEnabled()) {
             return AuthenticationResponse.builder()
                     .accessToken("")
                     .refreshToken("")
                     .mfaEnabled(true)
+                    .role(user.getRole())  // Include the user's role in the response
                     .build();
         }
 
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
 
+
         revokeAllUserTokens(user);
 
         saveUserToken(user, jwtToken);
+        System.out.println("token: " + jwtToken);
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .mfaEnabled(false)
+                .role(user.getRole())  // Include the user's role in the response
                 .build();
     }
 
@@ -155,6 +163,15 @@ public class AuthenticationService {
         }
     }
 
+    public Boolean isUserAuthenticated(String jwtToken) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(jwtService.extractUsername(jwtToken));
+        try {
+            return jwtService.isTokenValid(jwtToken, userDetails);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public AuthenticationResponse verifyCode(VerificationRequest verificationRequest) {
         User user = userRepository
                 .findByEmail(verificationRequest.getEmail())
@@ -162,7 +179,7 @@ public class AuthenticationService {
                         String.format("No user found %S" + verificationRequest.getEmail()))
                 );
 
-        if (tfaService.isOtpNotValid(user.getSecret(), verificationRequest.getCode())){
+        if (tfaService.isOtpNotValid(user.getSecret(), verificationRequest.getCode())) {
             throw new BadCredentialsException("Code is not correct.");
         }
 
@@ -172,5 +189,11 @@ public class AuthenticationService {
                 .accessToken(jwtToken)
                 .mfaEnabled(user.isMfaEnabled())
                 .build();
+    }
+
+    public Boolean userHasRole(String roles, String jwtToken) {
+        String[] roleArray = roles.split(",");
+        UserDetails userDetails = userDetailsService.loadUserByUsername(jwtService.extractUsername(jwtToken));
+        return Arrays.stream(roleArray).anyMatch(role -> userDetails.getAuthorities().contains(new SimpleGrantedAuthority(role)));
     }
 }

@@ -6,10 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -53,7 +50,17 @@ public class AuthenticationController {
     @PostMapping("/verify")
     public ResponseEntity<?> verifyCode(
             @RequestBody VerificationRequest verificationRequest
-    ){
+    ) {
         return ResponseEntity.ok(service.verifyCode(verificationRequest));
+    }
+
+    @GetMapping("/isLoggedIn")
+    public Boolean isUserAuthenticated(@RequestParam String token) {
+        return service.isUserAuthenticated(token);
+    }
+
+    @GetMapping("/hasRole")
+    public Boolean userHasRole(@RequestParam String roles, @RequestParam String token) {
+        return service.userHasRole(roles, token);
     }
 }
