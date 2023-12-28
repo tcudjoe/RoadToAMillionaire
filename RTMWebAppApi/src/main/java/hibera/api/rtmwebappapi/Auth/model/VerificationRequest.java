@@ -1,4 +1,4 @@
-package hibera.api.rtmwebappapi.Auth.service;
+package hibera.api.rtmwebappapi.Auth.model;
 
 import lombok.Builder;
 import lombok.Data;

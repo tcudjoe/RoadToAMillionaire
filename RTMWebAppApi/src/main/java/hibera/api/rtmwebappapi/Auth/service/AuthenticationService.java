@@ -1,17 +1,18 @@
 package hibera.api.rtmwebappapi.Auth.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hibera.api.rtmwebappapi.Auth.AuthenticationRequest;
-import hibera.api.rtmwebappapi.Auth.AuthenticationResponse;
-import hibera.api.rtmwebappapi.Auth.RegisterRequest;
+import hibera.api.rtmwebappapi.Auth.model.AuthenticationRequest;
+import hibera.api.rtmwebappapi.Auth.model.AuthenticationResponse;
+import hibera.api.rtmwebappapi.Auth.model.RegisterRequest;
+import hibera.api.rtmwebappapi.Auth.model.VerificationRequest;
 import hibera.api.rtmwebappapi.config.JwtService;
 import hibera.api.rtmwebappapi.domain.Role;
-import hibera.api.rtmwebappapi.domain.User;
-import hibera.api.rtmwebappapi.repositories.UserRepository;
+import hibera.api.rtmwebappapi.users.user.model.User;
+import hibera.api.rtmwebappapi.users.user.repository.UserRepository;
 import hibera.api.rtmwebappapi.tfa.TwoFactorAuthentication;
-import hibera.api.rtmwebappapi.token.Token;
-import hibera.api.rtmwebappapi.token.TokenRepository;
-import hibera.api.rtmwebappapi.token.TokenType;
+import hibera.api.rtmwebappapi.token.model.Token;
+import hibera.api.rtmwebappapi.token.repository.TokenRepository;
+import hibera.api.rtmwebappapi.token.model.TokenType;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

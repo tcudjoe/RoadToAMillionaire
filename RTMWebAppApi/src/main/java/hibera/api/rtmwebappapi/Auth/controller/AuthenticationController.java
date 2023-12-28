@@ -1,7 +1,10 @@
-package hibera.api.rtmwebappapi.Auth;
+package hibera.api.rtmwebappapi.Auth.controller;
 
+import hibera.api.rtmwebappapi.Auth.model.AuthenticationRequest;
+import hibera.api.rtmwebappapi.Auth.model.AuthenticationResponse;
+import hibera.api.rtmwebappapi.Auth.model.RegisterRequest;
 import hibera.api.rtmwebappapi.Auth.service.AuthenticationService;
-import hibera.api.rtmwebappapi.Auth.service.VerificationRequest;
+import hibera.api.rtmwebappapi.Auth.model.VerificationRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

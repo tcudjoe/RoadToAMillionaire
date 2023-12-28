@@ -1,4 +1,4 @@
-package hibera.api.rtmwebappapi.Auth;
+package hibera.api.rtmwebappapi.Auth.model;
 
 import hibera.api.rtmwebappapi.domain.Role;
 import lombok.AllArgsConstructor;

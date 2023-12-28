@@ -1,6 +1,6 @@
-package hibera.api.rtmwebappapi.repositories;
+package hibera.api.rtmwebappapi.users.user.repository;
 
-import hibera.api.rtmwebappapi.domain.User;
+import hibera.api.rtmwebappapi.users.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

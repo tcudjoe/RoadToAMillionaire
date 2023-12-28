@@ -1,4 +1,4 @@
-package hibera.api.rtmwebappapi.Auth;
+package hibera.api.rtmwebappapi.Auth.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

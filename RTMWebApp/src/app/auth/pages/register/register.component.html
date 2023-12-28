@@ -1,4 +1,4 @@
-<div *ngIf="authResponse && !message" class="toast" aria-atomic="true" aria-live="assertive" role="alert">
+<div *ngIf="authResponse && !message" aria-atomic="true" aria-live="assertive" class="toast" role="alert">
   <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>
   <div class="toast-body">
     {{ authResponse.mfaEnabled ? 'Multi Factor Authentication enabled successfully!' : 'Account created successfully! You will be redirected to the login page.' }}
@@ -6,18 +6,38 @@
 </div>
 
 <!-- Toaster for error message -->
-<div *ngIf="message" class="toast" aria-atomic="true" aria-live="assertive" role="alert">
+<div *ngIf="message" aria-atomic="true" aria-live="assertive" class="toast" role="alert">
   <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>
   <div class="toast-body">
     {{ message }}
   </div>
 </div>
 
-<div *ngIf="!authResponse.mfaEnabled" class="container">
+<div *ngIf="!authResponse.mfaEnabled" class="container-fluid">
   <div class="row">
-    <div class="col-12">
-      <h2>Register</h2>
+    <div class="col-8">
+      <img alt="" src="./assets/img/brandAssets/Transparent/PNG/Logo/Logo%203.png">
+    </div>
+    <div class="col-4">
       <form (ngSubmit)="registerUser()">
+        <h2>Register</h2>
+        <div class="socialIcons mt-4">
+          <div class="icon">
+            <i class="fa-brands fa-google fa-2xl"></i>
+          </div>
+          <div class="icon">
+            <i class="fa-brands fa-linkedin-in fa-2xl"></i>
+          </div>
+          <div class="icon">
+            <i class="fa-brands fa-facebook-f fa-2xl"></i>
+          </div>
+          <div class="icon">
+            <i class="fa-brands fa-x-twitter fa-2xl"></i>
+          </div>
+        </div>
+        <div class="separator">
+          <b>or</b>
+        </div>
         <div class="mb-3">
           <label class="form-label" for="exampleInputEmail1">First name</label>
           <input [(ngModel)]="registerRequest.firstName" aria-describedby="FirstnameHelp" class="form-control"

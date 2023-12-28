@@ -1,10 +1,10 @@
-package hibera.api.rtmwebappapi.domain;
+package hibera.api.rtmwebappapi.users.user.model;
 
-import hibera.api.rtmwebappapi.token.Token;
+import hibera.api.rtmwebappapi.domain.Role;
+import hibera.api.rtmwebappapi.token.model.Token;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;

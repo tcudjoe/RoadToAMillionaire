@@ -1,6 +1,6 @@
 package hibera.api.rtmwebappapi.config;
 
-import hibera.api.rtmwebappapi.token.TokenRepository;
+import hibera.api.rtmwebappapi.token.repository.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

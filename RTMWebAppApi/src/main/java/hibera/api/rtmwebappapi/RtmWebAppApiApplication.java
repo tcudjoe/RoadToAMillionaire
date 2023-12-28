@@ -1,15 +1,11 @@
 package hibera.api.rtmwebappapi;
 
-import hibera.api.rtmwebappapi.Auth.RegisterRequest;
 import hibera.api.rtmwebappapi.Auth.service.AuthenticationService;
-import hibera.api.rtmwebappapi.domain.Role;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
-import static hibera.api.rtmwebappapi.domain.Role.*;
 
 @SpringBootApplication
 @EnableJpaRepositories
