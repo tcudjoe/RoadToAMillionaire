@@ -4,6 +4,7 @@ import {AuthenticationResponse} from "../../models/authentication-response/authe
 import {VerificationRequest} from "../../models/verificationRequest/verification-request";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
 import {Router} from "@angular/router";
+import {isEmpty} from "rxjs";
 
 @Component({
   selector: 'app-register',
@@ -11,10 +12,11 @@ import {Router} from "@angular/router";
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-  registerRequest: RegisterRequest = {};
-  authResponse: AuthenticationResponse = {};
   message: string = '';
   otpCode = '';
+  registrationStep: number = 1;
+  registerRequest: RegisterRequest = {};
+  authResponse: AuthenticationResponse = {};
 
   constructor(
     private authService: AuthenticationService,
@@ -22,8 +24,22 @@ export class RegisterComponent {
   ) {
   }
 
+  nextStep() {
+    this.message = '';
+    this.registrationStep++;
+  }
+
+  prevStep() {
+    this.message = '';
+    this.registrationStep--;
+  }
+
   registerUser() {
     this.message = '';
+
+    if (this.registrationStep === 1) {
+      this.nextStep()
+    }
     this.authService.register(this.registerRequest).subscribe({
       next: (response: AuthenticationResponse) => {
         if (response) {
@@ -64,4 +80,6 @@ export class RegisterComponent {
       }
     });
   }
+
+  protected readonly isEmpty = isEmpty;
 }

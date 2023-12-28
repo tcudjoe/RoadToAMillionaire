@@ -13,13 +13,14 @@
   </div>
 </div>
 
-<div *ngIf="!authResponse.mfaEnabled" class="container-fluid">
-  <div class="row">
+<div class="container-fluid">
+  <div *ngIf="registrationStep === 1" class="row">
     <div class="col-8">
       <img alt="" src="./assets/img/brandAssets/Transparent/PNG/Logo/Logo%203.png">
     </div>
+
     <div class="col-4">
-      <form (ngSubmit)="registerUser()">
+      <form>
         <h2>Register</h2>
         <div class="socialIcons mt-4">
           <div class="icon">
@@ -36,41 +37,101 @@
           </div>
         </div>
         <div class="separator">
-          <b>or</b>
+          <b>Or</b>
         </div>
-        <div class="mb-3">
-          <label class="form-label" for="exampleInputEmail1">First name</label>
-          <input [(ngModel)]="registerRequest.firstName" aria-describedby="FirstnameHelp" class="form-control"
-                 id="exampleInputFirstname1"
-                 name="firstName" type="text">
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="exampleInputSurname1">Surname</label>
-          <input [(ngModel)]="registerRequest.lastName" class="form-control" id="exampleInputSurname1" name="lastName"
-                 type="text">
-        </div>
+
         <div class="mb-3">
           <label class="form-label" for="exampleInputEmail1">Email address</label>
-          <input [(ngModel)]="registerRequest.email" aria-describedby="emailHelp" class="form-control"
-                 id="exampleInputEmail1" name="email"
-                 type="email">
+          <input #email="ngModel" [(ngModel)]="registerRequest.email" aria-describedby="emailHelp" class="form-control"
+                 id="exampleInputEmail1" name="email" placeholder="john@example.com"
+                 required type="email">
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
+            <div *ngIf="email.errors?.['required']" class="inv-feedback">Email is required.</div>
+          </div>
         </div>
-        <div class="mb-3">
-          <label class="form-label" for="exampleInputPassword1">Password</label>
-          <input [(ngModel)]="registerRequest.password" class="form-control" id="exampleInputPassword1" name="password"
-                 type="password">
-        </div>
-        <div class="form-check form-switch">
-          <input [(ngModel)]="registerRequest.mfaEnabled" class="form-check-input" id="flexSwitchCheckDefault"
-                 name="mfaEnabled" role="switch"
-                 type="checkbox">
-          <label class="form-check-label" for="flexSwitchCheckDefault">Enable MFA (Multi Factor Authentication)</label>
-        </div>
-        <button class="btn btn-primary" name="submit" type="submit">Register</button>
+        <button (click)="nextStep()" [disabled]="!email" class="btn" name="submit" type="submit">
+          Continue with email
+        </button>
         <br>
-        <a [routerLink]="'../login'">Have an account already? Login</a>
+        <br>
+        <a [routerLink]="'../login'">Have an account already? Go to the Login page</a>
       </form>
     </div>
+  </div>
+</div>
+
+<div *ngIf="registrationStep === 2" class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h2></h2>
+          <div class="row">
+            <div class="mb-3 col">
+              <label class="form-label" for="exampleInputEmail1">First name</label>
+              <input #firstname="ngModel" [(ngModel)]="registerRequest.firstName" aria-describedby="FirstnameHelp"
+                     class="form-control"
+                     id="firstname" placeholder="John"
+                     name="firstName" required type="text">
+              <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="alert">
+                <div *ngIf="firstname.errors?.['required']" class="inv-feedback">Firstname is required.</div>
+              </div>
+            </div>
+            <div class="mb-3 col">
+              <label class="form-label" for="exampleInputSurname1">Surname</label>
+              <input #surname="ngModel" [(ngModel)]="registerRequest.lastName" class="form-control"
+                     id="surname"
+                     name="lastName" placeholder="Doe"
+                     required type="text">
+              <div *ngIf="surname.invalid && (surname.dirty || surname.touched)" class="alert">
+                <div *ngIf="surname.errors?.['required']" class="inv-feedback">Firstname is required.</div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="exampleInputPassword1">Password</label>
+            <input [(ngModel)]="registerRequest.password" class="form-control" id="password"
+                   name="password" placeholder="*********"
+                   type="password">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="registrationStep === 3" class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h2></h2>
+          <div class="mb-3">
+            <!--            <label class="form-label" for="exampleInputEmail1">First name</label>-->
+            <!--            <input [(ngModel)]="registerRequest.firstName" aria-describedby="FirstnameHelp" class="form-control"-->
+            <!--                   id="exampleInputFirstname1"-->
+            <!--                   name="firstName" type="text">-->
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="exampleInputSurname1">Surname</label>
+            <input [(ngModel)]="registerRequest.lastName" class="form-control" id="exampleInputSurname1" name="lastName"
+                   type="text">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="exampleInputPassword1">Password</label>
+            <input [(ngModel)]="registerRequest.password" class="form-control" id="exampleInputPassword1"
+                   name="password"
+                   type="password">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-check form-switch">
+    <input [(ngModel)]="registerRequest.mfaEnabled" class="form-check-input" id="flexSwitchCheckDefault"
+           name="mfaEnabled" role="switch"
+           type="checkbox">
+    <label class="form-check-label" for="flexSwitchCheckDefault">Enable MFA (Multi Factor Authentication)</label>
   </div>
 </div>
 
