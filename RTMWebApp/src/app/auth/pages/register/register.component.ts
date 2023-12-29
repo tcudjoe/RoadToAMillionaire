@@ -17,6 +17,7 @@ export class RegisterComponent {
   registrationStep: number = 1;
   registerRequest: RegisterRequest = {};
   authResponse: AuthenticationResponse = {};
+  protected readonly isEmpty = isEmpty;
 
   constructor(
     private authService: AuthenticationService,
@@ -26,6 +27,7 @@ export class RegisterComponent {
 
   nextStep() {
     this.message = '';
+    console.log(`MfaEnabled = ${this.registerRequest.mfaEnabled}, ImageUri = ${this.authResponse.secretImageUri}`)
     this.registrationStep++;
   }
 
@@ -45,11 +47,15 @@ export class RegisterComponent {
         if (response) {
           this.authResponse = response
         } else {
-          this.message = "Account created successfully! You will be redirected to the login page."
-          setTimeout(() => {
-              this.router.navigate(['/auth/login'])
-            },
-            3000)
+          if (this.authResponse.mfaEnabled) {
+            this.message = "Redirecting to enable 2FA authentication"
+          } else {
+            this.message = "Account created successfully! You will be redirected to the login page."
+            // setTimeout(() => {
+            //     this.router.navigate(['/auth/login'])
+            //   },
+            //   3000)
+          }
         }
       },
       error: (error) => {
@@ -57,6 +63,16 @@ export class RegisterComponent {
         this.message = 'Error: ' + error.message;
       }
     });
+  }
+
+  enableTwoFactorAuthentication() {
+    this.registerRequest.mfaEnabled = true;
+    this.registerUser()
+    this.nextStep();
+  }
+
+  navigate() {
+    this.router.navigate(['/auth/login'])
   }
 
   verifyTfa() {
@@ -80,6 +96,4 @@ export class RegisterComponent {
       }
     });
   }
-
-  protected readonly isEmpty = isEmpty;
 }

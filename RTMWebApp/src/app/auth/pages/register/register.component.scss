@@ -1,6 +1,12 @@
 @import "./../../../../../src/scss/variables";
 
-.row {
+.btn {
+  color: $white;
+  background: $primary;
+  width: 100%;
+}
+
+.step1 .row {
   min-height: 100vh !important;
 }
 
@@ -83,6 +89,31 @@
       cursor: pointer;
       margin-top: -$p-xs;
       background: $primary;
+    }
+  }
+
+}
+
+.container-fluid  {
+
+   .col-12 img {
+    width: 440px !important;
+    padding: 50px 50px;
+  }
+
+  .step2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h2, p {
+      text-align: center;
+    }
+
+    .card {
+      box-shadow: 0px 4px 12px 9px rgba(0, 0, 0, 0.25);;
+      width: 670px;
+
     }
   }
 }

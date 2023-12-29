@@ -7,13 +7,13 @@ h1, h2, h3, h4, h5, h6, button, label, textarea {
 }
 
 p, a, li, ul, i, input{
-  font-family: 'Overpass', sans-serif;
   font-weight: 300 !important;
+  font-family: 'Overpass', sans-serif;
 }
 
 a, li, ul, i {
-  text-decoration: none !important;
   list-style: none;
+  text-decoration: none !important;
 }
 
 .inv-feedback {
