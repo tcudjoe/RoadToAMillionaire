@@ -41,7 +41,7 @@ public class SecurityConfig extends AbstractHttpConfigurer<SecurityConfig, HttpS
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((req) ->
-                                req.requestMatchers(mvcMatcherBuilder.pattern("/api/v1/auth/**"))
+                                req.requestMatchers(mvcMatcherBuilder.pattern("/api/v1/auth/**"), mvcMatcherBuilder.pattern("/oauth2/**"))
                                         .permitAll()
 
                                         .requestMatchers(mvcMatcherBuilder.pattern("/api/v1/admin/**")).hasRole(ADMIN.name())

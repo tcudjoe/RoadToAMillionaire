@@ -1,27 +1,63 @@
-<div class="container">
-  <div class="row">
-    <h2>Login</h2>
-    <div *ngIf="!authResponse.mfaEnabled" class="col-12">
-      <form (ngSubmit)="authenticate()">
+<div *ngIf="registrationStep === 1" class="container-fluid step1">
+  <div class="row ">
+    <div class="col-4">
+      <form>
+        <h2>Login</h2>
+        <div class="socialIcons mt-4">
+          <div class="icon">
+            <i class="fa-brands fa-google fa-2xl"></i>
+          </div>
+          <div class="icon">
+            <i class="fa-brands fa-linkedin-in fa-2xl"></i>
+          </div>
+          <div class="icon">
+            <i class="fa-brands fa-facebook-f fa-2xl"></i>
+          </div>
+          <div class="icon">
+            <i class="fa-brands fa-x-twitter fa-2xl"></i>
+          </div>
+        </div>
+
+        <div class="separator">
+          <b>Or</b>
+        </div>
+
         <div class="mb-3">
           <label class="form-label" for="exampleInputEmail1">Email address</label>
-          <input [(ngModel)]="authenticationRequest.email" aria-describedby="emailHelp" class="form-control"
-                 id="exampleInputEmail1" name="email"
-                 type="email">
+          <input #email="ngModel" [(ngModel)]="authenticationRequest.email" aria-describedby="emailHelp"
+                 class="form-control"
+                 email
+                 id="exampleInputEmail1" name="email" placeholder="john@example.com"
+                 required type="email">
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
+            <div *ngIf="email.errors?.['required']" class="inv-feedback">Email is required.</div>
+            <div *ngIf="email.errors?.['email']" class="inv-feedback">Input should be an email.</div>
+          </div>
         </div>
         <div class="mb-3">
           <label class="form-label" for="exampleInputPassword1">Password</label>
-          <input [(ngModel)]="authenticationRequest.password" class="form-control" id="exampleInputPassword1" name="password"
+          <input #password="ngModel" [(ngModel)]="authenticationRequest.password" class="form-control"
+                 id="exampleInputPassword1" name="password" placeholder="*********"
                  type="password">
+          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
+            <div *ngIf="password.errors?.['required']" class="inv-feedback">Password is required.</div>
+          </div>
         </div>
-        <button class="btn btn-primary" name="submit" type="submit">Login</button>
+        <button [disabled]="email.invalid || password.invalid" (click)="nextStep()" class="btn" name="button" type="submit">
+          Continue with email
+        </button>
         <br>
+        <br>
+        <a [routerLink]="'../register'">Don't have an account yet? Go to the Register page</a>
       </form>
+    </div>
+    <div class="col-8">
+      <img alt="" src="./assets/img/brandAssets/Transparent/PNG/Logo/Logo%203.png">
     </div>
   </div>
 </div>
 
-<div *ngIf="authResponse.mfaEnabled" class="container">
+<div *ngIf="registrationStep === 2" class="container">
   <div class="row">
     <h2>Two-Factor Authentication</h2>
     <div class="col-12">

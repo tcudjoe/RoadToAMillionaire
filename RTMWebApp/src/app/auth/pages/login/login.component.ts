@@ -15,6 +15,7 @@ export class LoginComponent {
   authenticationRequest: AuthenticationRequest = {role: ""};
   authResponse: AuthenticationResponse = {};
   otpCode: any;
+  registrationStep: number = 1;
 
   constructor(
     private authService: AuthenticationService,
@@ -65,5 +66,13 @@ export class LoginComponent {
         });
       },
     });
+  }
+
+  nextStep() {
+    if (this.authResponse.mfaEnabled) {
+      this.verifyCode()
+    } else {
+      this.registrationStep++;
+    }
   }
 }
