@@ -11,6 +11,15 @@
   width: 670px;
 }
 
+a, svg {
+  cursor: pointer;
+  transition: 250ms;
+}
+
+a:hover, svg:hover {
+  padding-left: $p-xxs !important;
+}
+
 .step1 .row {
   min-height: 100vh !important;
 }
@@ -103,7 +112,7 @@
 
   .col-12 img {
     width: 440px !important;
-    padding: 50px 50px;
+    padding: 50px 30px;
   }
 
   .step2 {

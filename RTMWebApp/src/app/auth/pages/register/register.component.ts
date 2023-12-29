@@ -25,6 +25,7 @@ export class RegisterComponent {
   ) {
   }
 
+
   nextStep() {
     this.message = '';
     console.log(`MfaEnabled = ${this.registerRequest.mfaEnabled}, ImageUri = ${this.authResponse.secretImageUri}`)

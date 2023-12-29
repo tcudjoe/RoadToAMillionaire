@@ -70,7 +70,13 @@
     <div class="col-12 step2">
       <div class="card">
         <div class="card-body">
-          <i class="fa-solid fa-circle-chevron-left"></i> Back
+          <a (click)="prevStep()">
+            <svg height="16" viewBox="0 0 320 512" width="10" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/>
+            </svg>
+            Back
+          </a>
           <h2>Let’s get you started</h2>
           <p>Begin by creating an account</p>
           <div class="row">
@@ -109,7 +115,7 @@
             </div>
           </div>
 
-          <button (click)="nextStep()" class="btn">Sign up</button>
+          <button (click)="nextStep()" [disabled]="firstname.invalid || surname.invalid || password.invalid" class="btn">Sign up</button>
         </div>
       </div>
     </div>
@@ -118,10 +124,17 @@
 
 <div *ngIf="registrationStep === 3" class="container chooseMfa">
   <div class="row">
-    <img class="logo" alt="" src="./assets/img/brandAssets/Transparent/PNG/Logo/Logo%201.png">
+    <img alt="" class="logo" src="./assets/img/brandAssets/Transparent/PNG/Logo/Logo%201.png">
     <div class="col-12">
       <div class="card eMfa">
         <div class="card-body">
+          <a (click)="prevStep()">
+            <svg height="16" viewBox="0 0 320 512" width="10" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/>
+            </svg>
+            Back
+          </a>
           <h2>Do you want to enable 2-Factor Authentication?</h2>
           <div class="d-grid gap-2 d-md-block">
             <button (click)="enableTwoFactorAuthentication()" class="btn mb-3" type="button">Yes, I want to be secure!
@@ -141,6 +154,13 @@
     <div class="col-12">
       <div class="card mfa">
         <div class="card-body ">
+          <a (click)="prevStep()">
+            <svg height="16" viewBox="0 0 320 512" width="10" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/>
+            </svg>
+            Back
+          </a>
           <h2>Setup Multi Factor Authentication</h2>
           <div class="qr-code" style="text-align: center">
             <img [src]="authResponse.secretImageUri" alt="Qr Code for MFA">
