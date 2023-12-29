@@ -6,6 +6,11 @@
   width: 100%;
 }
 
+.card {
+  box-shadow: 0px 4px 12px 9px rgba(0, 0, 0, 0.25);;
+  width: 670px;
+}
+
 .step1 .row {
   min-height: 100vh !important;
 }
@@ -94,9 +99,9 @@
 
 }
 
-.container-fluid  {
+.container-fluid {
 
-   .col-12 img {
+  .col-12 img {
     width: 440px !important;
     padding: 50px 50px;
   }
@@ -113,9 +118,52 @@
     .card {
       box-shadow: 0px 4px 12px 9px rgba(0, 0, 0, 0.25);;
       width: 670px;
-
     }
   }
+}
+
+.chooseMfa {
+
+  .logo {
+    width: 440px !important;
+    padding: 50px 30px;
+    text-align: center;
+  }
+
+  .col-12 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .eMfa {
+      h2 {
+        text-align: center;
+      }
+    }
+  }
+
+}
+
+.enabled {
+  .logo {
+    width: 440px !important;
+    padding: 50px 30px;
+    text-align: center;
+  }
+
+  .col-12 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .mfa {
+
+      h2 {
+        text-align: center;
+      }
+    }
+  }
+
 }
 
 

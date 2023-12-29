@@ -109,48 +109,49 @@
             </div>
           </div>
 
-          <button class="btn" (click)="nextStep()">Sign up</button>
+          <button (click)="nextStep()" class="btn">Sign up</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div *ngIf="registrationStep === 3" class="container">
+<div *ngIf="registrationStep === 3" class="container chooseMfa">
   <div class="row">
+    <img class="logo" alt="" src="./assets/img/brandAssets/Transparent/PNG/Logo/Logo%201.png">
     <div class="col-12">
-      <img alt="" src="./assets/img/brandAssets/Transparent/PNG/Logo/Logo%201.png">
-      <div class="card">
+      <div class="card eMfa">
         <div class="card-body">
           <h2>Do you want to enable 2-Factor Authentication?</h2>
           <div class="d-grid gap-2 d-md-block">
-            <button (click)="enableTwoFactorAuthentication()" class="btn" type="button">Yes, I want to be secure!</button>
-            <button (click)="navigate()" (click)="registerUser()" class="btn" type="button">Nah, I'll do it later!</button>
+            <button (click)="enableTwoFactorAuthentication()" class="btn mb-3" type="button">Yes, I want to be secure!
+            </button>
+            <button (click)="navigate()" (click)="registerUser()" class="btn mb-3" type="button">Nah, I'll do it later!
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-<!--  <div class="form-check form-switch">-->
-<!--    <input [(ngModel)]="registerRequest.mfaEnabled" class="form-check-input" id="flexSwitchCheckDefault"-->
-<!--           name="mfaEnabled" role="switch"-->
-<!--           type="checkbox">-->
-<!--    <label class="form-check-label" for="flexSwitchCheckDefault">Enable MFA (Multi Factor Authentication)</label>-->
-<!--  </div>-->
 </div>
 
-<div *ngIf="registrationStep === 4 && registerRequest.mfaEnabled" class="container">
+<div *ngIf="registrationStep === 4 && registerRequest.mfaEnabled" class="container-fluid enabled">
   <div class="row">
-    <h2>Setup Multi Factor Authentication</h2>
+    <img alt="" class="logo" src="./assets/img/brandAssets/Transparent/PNG/Logo/Logo%201.png">
     <div class="col-12">
-      <div class="qr-code">
-        <img [src]="authResponse.secretImageUri" alt="Qr Code for MFA">
-      </div>
-      <div class="mb-3">
-        <label class="form-label" for="exampleInputQrcode1">Fill in the 6-digit number:</label>
-        <input [(ngModel)]="otpCode" aria-describedby="qrCodeHelp" class="form-control" id="exampleInputQrcode1"
-               name="validationCode" required type="number">
-        <button (click)="verifyTfa()" [class.button-disabled]="otpCode.length < 6" class="btn">Verify code</button>
+      <div class="card mfa">
+        <div class="card-body ">
+          <h2>Setup Multi Factor Authentication</h2>
+          <div class="qr-code" style="text-align: center">
+            <img [src]="authResponse.secretImageUri" alt="Qr Code for MFA">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="exampleInputQrcode1">Fill in the 6-digit number:</label>
+            <input [(ngModel)]="otpCode" aria-describedby="qrCodeHelp" class="form-control" id="exampleInputQrcode1"
+                   name="validationCode" required type="number">
+          </div>
+          <button (click)="verifyTfa()" [class.button-disabled]="otpCode.length < 6" class="btn">Verify code</button>
+        </div>
       </div>
     </div>
   </div>
