@@ -1,0 +1,40 @@
+@import "./../../../../../src/scss/variables";
+
+.navbar {
+  .offcanvas {
+    background: $primary;
+
+    li a {
+      color: $white;
+      font-size: 32px;
+
+      svg path, i {
+        color: $secondary !important;
+      }
+    }
+
+    .logo {
+      width: 70%;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 576px) {
+}
+
+@media only screen and (min-width: 576px) {
+}
+
+@media only screen and (min-width: 768px) {
+}
+
+@media only screen and (min-width: 992px) {
+}
+
+@media only screen and (min-width: 1200px) {
+}
+
+@media only screen and (min-width: 1400px) {
+
+}
