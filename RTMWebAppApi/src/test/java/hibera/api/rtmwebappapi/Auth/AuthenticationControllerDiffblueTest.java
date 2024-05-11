@@ -4,11 +4,11 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hibera.api.rtmwebappapi.Auth.controller.AuthenticationController;
+import hibera.api.rtmwebappapi.controllers.AuthenticationController;
 import hibera.api.rtmwebappapi.Auth.model.AuthenticationRequest;
-import hibera.api.rtmwebappapi.Auth.model.AuthenticationResponse;
-import hibera.api.rtmwebappapi.Auth.model.RegisterRequest;
-import hibera.api.rtmwebappapi.Auth.service.AuthenticationService;
+import hibera.api.rtmwebappapi.domain.dto.AuthenticationResponse;
+import hibera.api.rtmwebappapi.domain.dto.RegisterRequest;
+import hibera.api.rtmwebappapi.Auth.service.AuthService;
 import hibera.api.rtmwebappapi.domain.Role;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -32,7 +32,7 @@ class AuthenticationControllerDiffblueTest {
   private AuthenticationController authenticationController;
 
   @MockBean
-  private AuthenticationService authenticationService;
+  private AuthService authenticationService;
 
   /**
    * Method under test: {@link AuthenticationController#register(RegisterRequest)}

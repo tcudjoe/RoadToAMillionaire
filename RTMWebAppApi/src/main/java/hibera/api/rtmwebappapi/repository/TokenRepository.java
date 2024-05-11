@@ -1,6 +1,6 @@
-package hibera.api.rtmwebappapi.token.repository;
+package hibera.api.rtmwebappapi.repository;
 
-import hibera.api.rtmwebappapi.token.model.Token;
+import hibera.api.rtmwebappapi.domain.Token;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

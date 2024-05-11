@@ -1,4 +1,4 @@
-package hibera.api.rtmwebappapi.config;
+package hibera.api.rtmwebappapi.Auth.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

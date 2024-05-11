@@ -1,6 +1,6 @@
 package hibera.api.rtmwebappapi.config;
 
-import hibera.api.rtmwebappapi.users.user.repository.UserRepository;
+import hibera.api.rtmwebappapi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

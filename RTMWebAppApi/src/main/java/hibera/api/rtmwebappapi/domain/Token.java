@@ -1,6 +1,5 @@
-package hibera.api.rtmwebappapi.token.model;
+package hibera.api.rtmwebappapi.domain;
 
-import hibera.api.rtmwebappapi.users.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 
