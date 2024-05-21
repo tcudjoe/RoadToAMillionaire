@@ -1,11 +1,4 @@
-<div *ngIf="authResponse && !message" aria-atomic="true" aria-live="assertive" class="toast" role="alert">
-  <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>
-  <div class="toast-body">
-    {{ authResponse.mfaEnabled ? 'Multi Factor Authentication enabled successfully!' : 'Account created successfully! You will be redirected to the login page.' }}
-  </div>
-</div>
 
-<!-- Toaster for error message -->
 <div *ngIf="message" aria-atomic="true" aria-live="assertive" class="toast" role="alert">
   <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>
   <div class="toast-body">
@@ -13,47 +6,25 @@
   </div>
 </div>
 
-<div class="container-fluid step1">
-  <div *ngIf="registrationStep === 1" class="row ">
+<!-- Registration Form Step 1 -->
+<div class="container-fluid step1" *ngIf="registrationStep === 1">
+  <div class="row">
     <div class="col-8">
-      <img alt="" src="./assets/img/brandAssets/Transparent/PNG/Logo/Logo%203.png">
+      <img alt="RTM Logo" src="./assets/img/brandAssets/Transparent/PNG/Logo/Logo%203.png">
     </div>
-
     <div class="col-4">
-      <form>
+      <form (ngSubmit)="nextStep()" #step1Form="ngForm">
         <h2>Register</h2>
-        <div class="socialIcons mt-4">
-          <div class="icon">
-            <i class="fa-brands fa-google fa-2xl"></i>
-          </div>
-          <div class="icon">
-            <i class="fa-brands fa-linkedin-in fa-2xl"></i>
-          </div>
-          <div class="icon">
-            <i class="fa-brands fa-facebook-f fa-2xl"></i>
-          </div>
-          <div class="icon">
-            <i class="fa-brands fa-x-twitter fa-2xl"></i>
-          </div>
-        </div>
-        <div class="separator">
-          <b>Or</b>
-        </div>
 
         <div class="mb-3">
-          <label class="form-label" for="exampleInputEmail1">Email address</label>
-          <input #email="ngModel" [(ngModel)]="registerRequest.email" aria-describedby="emailHelp" class="form-control"
-                 email
-                 id="exampleInputEmail1" name="email" placeholder="john@example.com"
-                 required type="email">
+          <label class="form-label" for="email">Email address</label>
+          <input [(ngModel)]="registerPayload.email" #email="ngModel" name="email" id="email" class="form-control" placeholder="john@example.com" required email>
           <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
             <div *ngIf="email.errors?.['required']" class="inv-feedback">Email is required.</div>
             <div *ngIf="email.errors?.['email']" class="inv-feedback">Input should be an email.</div>
           </div>
         </div>
-        <button (click)="nextStep()" [disabled]="email.invalid" class="btn" name="button" type="submit">
-          Continue with email
-        </button>
+        <button type="submit" class="btn" [disabled]="email.invalid">Continue</button>
         <br>
         <br>
         <a [routerLink]="'../login'">Have an account already? Go to the Login page</a>
@@ -62,115 +33,50 @@
   </div>
 </div>
 
-<div *ngIf="registrationStep === 2" class="container-fluid ">
+<!-- Registration Form Step 2 -->
+<div class="container-fluid" *ngIf="registrationStep === 2">
   <div class="row">
-    <div class="col-12 ">
-      <img alt="" src="./assets/img/brandAssets/Transparent/PNG/Logo/Logo%201.png">
+    <div class="col-12">
+      <img alt="RTM Logo" src="./assets/img/brandAssets/Transparent/PNG/Logo/Logo%201.png">
     </div>
     <div class="col-12 step2">
       <div class="card">
         <div class="card-body">
           <a (click)="prevStep()">
             <svg height="16" viewBox="0 0 320 512" width="10" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/>
+              <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/>
             </svg>
             Back
           </a>
           <h2>Let’s get you started</h2>
           <p>Begin by creating an account</p>
-          <div class="row">
-            <div class="mb-3 col">
-              <label class="form-label" for="firstname">First name</label>
-              <input #firstname="ngModel" [(ngModel)]="registerRequest.firstName" aria-describedby="FirstnameHelp"
-                     class="form-control"
-                     id="firstname" name="firstName"
-                     placeholder="John" required type="text">
-              <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="alert">
-                <div *ngIf="firstname.errors?.['required']" class="inv-feedback">Firstname is required.</div>
+          <form (ngSubmit)="registerUser()" #step2Form="ngForm">
+            <div class="row">
+              <div class="mb-3 col">
+                <label class="form-label" for="firstname">First name</label>
+                <input [(ngModel)]="registerPayload.firstName" #firstname="ngModel" name="firstName" id="firstname" class="form-control" placeholder="John" required>
+                <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="alert">
+                  <div *ngIf="firstname.errors?.['required']" class="inv-feedback">Firstname is required.</div>
+                </div>
+              </div>
+              <div class="mb-3 col">
+                <label class="form-label" for="surname">Surname</label>
+                <input [(ngModel)]="registerPayload.lastName" #surname="ngModel" name="lastName" id="surname" class="form-control" placeholder="Doe" required>
+                <div *ngIf="surname.invalid && (surname.dirty || surname.touched)" class="alert">
+                  <div *ngIf="surname.errors?.['required']" class="inv-feedback">Surname is required.</div>
+                </div>
               </div>
             </div>
-            <div class="mb-3 col">
-              <label class="form-label" for="surname">Surname</label>
-              <input #surname="ngModel" [(ngModel)]="registerRequest.lastName" class="form-control"
-                     id="surname"
-                     name="lastName" placeholder="Doe"
-                     required type="text">
-              <div *ngIf="surname.invalid && (surname.dirty || surname.touched)" class="alert">
-                <div *ngIf="surname.errors?.['required']" class="inv-feedback">Surname is required.</div>
+            <div class="mb-5">
+              <label class="form-label" for="password">Password</label>
+              <input [(ngModel)]="registerPayload.password" #password="ngModel" name="password" id="password" class="form-control" placeholder="*********" required minlength="8" type="password">
+              <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
+                <div *ngIf="password.errors?.['required']" class="inv-feedback">Password is required.</div>
+                <div *ngIf="password.errors?.['minlength']" class="inv-feedback">Password should have a minimum of 8 characters.</div>
               </div>
             </div>
-          </div>
-
-          <div class="mb-5">
-            <label class="form-label" for="password">Password</label>
-            <input #password="ngModel" [(ngModel)]="registerRequest.password" class="form-control" id="password"
-                   minlength="8" name="password" placeholder="*********" required
-                   type="password">
-            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
-              <div *ngIf="password.errors?.['required']" class="inv-feedback">Password is required.</div>
-              <div *ngIf="password.errors?.['minlength']" class="inv-feedback">Password should have a minimum of 8
-                characters.
-              </div>
-            </div>
-          </div>
-
-          <button (click)="nextStep()" [disabled]="firstname.invalid || surname.invalid || password.invalid" class="btn">Sign up</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div *ngIf="registrationStep === 3" class="container chooseMfa">
-  <div class="row">
-    <img alt="" class="logo" src="./assets/img/brandAssets/Transparent/PNG/Logo/Logo%201.png">
-    <div class="col-12">
-      <div class="card eMfa">
-        <div class="card-body">
-          <a (click)="prevStep()">
-            <svg height="16" viewBox="0 0 320 512" width="10" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/>
-            </svg>
-            Back
-          </a>
-          <h2>Do you want to enable 2-Factor Authentication?</h2>
-          <div class="d-grid gap-2 d-md-block">
-            <button (click)="enableTwoFactorAuthentication()" class="btn mb-3" type="button">Yes, I want to be secure!
-            </button>
-            <button (click)="navigate()" (click)="registerUser()" class="btn mb-3" type="button">Nah, I'll do it later!
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div *ngIf="registrationStep === 4 && registerRequest.mfaEnabled" class="container-fluid enabled">
-  <div class="row">
-    <img alt="" class="logo" src="./assets/img/brandAssets/Transparent/PNG/Logo/Logo%201.png">
-    <div class="col-12">
-      <div class="card mfa">
-        <div class="card-body ">
-          <a (click)="prevStep()">
-            <svg height="16" viewBox="0 0 320 512" width="10" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/>
-            </svg>
-            Back
-          </a>
-          <h2>Setup Multi Factor Authentication</h2>
-          <div class="qr-code" style="text-align: center">
-            <img [src]="authResponse.secretImageUri" alt="Qr Code for MFA">
-          </div>
-          <div class="mb-3">
-            <label class="form-label" for="exampleInputQrcode1">Fill in the 6-digit number:</label>
-            <input [(ngModel)]="otpCode" aria-describedby="qrCodeHelp" class="form-control" id="exampleInputQrcode1"
-                   name="validationCode" required type="number">
-          </div>
-          <button (click)="verifyTfa()" [class.button-disabled]="otpCode.length < 6" class="btn">Verify code</button>
+            <button type="submit" class="btn" [disabled]="firstname.invalid || surname.invalid || password.invalid">Sign up</button>
+          </form>
         </div>
       </div>
     </div>

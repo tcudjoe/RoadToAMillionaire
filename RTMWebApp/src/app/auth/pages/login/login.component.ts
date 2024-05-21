@@ -1,78 +1,75 @@
-import {Component} from '@angular/core';
-import {RegisterRequest} from "../../models/registerRequest/register-request";
-import {AuthenticationResponse} from "../../models/authentication-response/authentication-response";
+import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../../services/authentication/authentication.service";
 import {Router} from "@angular/router";
-import {AuthenticationRequest} from "../../models/authenticationRequest/authentication-request";
-import {VerificationRequest} from "../../models/verificationRequest/verification-request";
+import {FormControl, FormGroup} from "@angular/forms";
+import {LoginPayload} from "../../models/login-payload";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
-  authenticationRequest: AuthenticationRequest = {role: ""};
-  authResponse: AuthenticationResponse = {};
-  otpCode: any;
-  registrationStep: number = 1;
+export class LoginComponent implements OnInit {
+  loginForm: FormGroup;
+  fieldTextType?: boolean;
+  loginPayload: LoginPayload = {
+    username: '',
+    password: ''
+  };
 
   constructor(
     private authService: AuthenticationService,
     private router: Router,
   ) {
+    this.loginForm = new FormGroup({
+      username: new FormControl(),
+      password: new FormControl()
+    })
   }
 
-  authenticate() {
-    this.authService.login(this.authenticationRequest)
-      .subscribe({
-        next: (response) => {
-          this.authResponse = response;
-          if (!this.authResponse.mfaEnabled) {
-            localStorage.setItem('token', response.accessToken as string)
 
-            if (this.authenticationRequest.role === 'USER') {
-              this.router.navigate(['/client/dashboard']);
-            } else if (this.authenticationRequest.role === 'ADMIN') {
-              this.router.navigate(['/admin/dashboard'])
-            } else if (this.authenticationRequest.role === 'MANAGER') {
-              this.router.navigate(['/manager/dashboard'])
-            } else {
-              this.router.navigate(['/client/dashboard']);
-            }
-          }
-        }
-      })
+  ngOnInit() {
+
   }
 
-  verifyCode() {
-    const verifyRequest: VerificationRequest = {
-      email: this.authenticationRequest.email,
-      code: this.otpCode
-    };
-    this.authService.verifyCode(verifyRequest).subscribe({
-      next: (response) => {
-        setTimeout(() => {
-          localStorage.setItem('token', response.accessToken as string);
-          if (this.authenticationRequest.role === 'USER') {
-            this.router.navigate(['/client/dashboard']);
-          } else if (this.authenticationRequest.role === 'ADMIN') {
-            this.router.navigate(['/admin/dashboard'])
-          } else if (this.authenticationRequest.role === 'MANAGER') {
-            this.router.navigate(['/manager/dashboard'])
-          } else {
-            this.router.navigate(['/client/dashboard']);
-          }
-        });
-      },
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
+  }
+
+  // authenticate() {
+  //   this.authService.login(this.authenticationRequest)
+  //     .subscribe({
+  //       next: (response) => {
+  //         this.authResponse = response;
+  //         if (!this.authResponse.mfaEnabled) {
+  //           localStorage.setItem('token', response.accessToken as string)
+  //
+  //           if (this.authenticationRequest.role === 'USER') {
+  //             this.router.navigate(['/client/dashboard']);
+  //           } else if (this.authenticationRequest.role === 'ADMIN') {
+  //             this.router.navigate(['/admin/dashboard'])
+  //           } else if (this.authenticationRequest.role === 'MANAGER') {
+  //             this.router.navigate(['/manager/dashboard'])
+  //           } else {
+  //             this.router.navigate(['/client/dashboard']);
+  //           }
+  //         }
+  //       }
+  //     })
+  // }
+
+
+  onSubmit() {
+    this.loginPayload.username = this.loginForm.get('username')?.value;
+    this.loginPayload.username = this.loginForm.get('password')?.value;
+
+    this.authService.login(this.loginPayload).subscribe(data => {
+      if (data) {
+        console.log('successfull login');
+        this.router.navigateByUrl('admin/dashboard');
+      } else {
+        console.log('error wit login');
+      }
     });
-  }
-
-  nextStep() {
-    if (this.authResponse.mfaEnabled) {
-      this.verifyCode()
-    } else {
-      this.registrationStep++;
-    }
   }
 }

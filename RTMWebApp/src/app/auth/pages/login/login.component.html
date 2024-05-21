@@ -1,56 +1,79 @@
-<div *ngIf="registrationStep === 1" class="container-fluid step1">
+<div class="container-fluid step1">
   <div class="row ">
     <div class="col-4">
-      <form>
-        <h2>Login</h2>
-        <div class="socialIcons mt-4">
-          <div class="icon">
-            <i class="fa-brands fa-google fa-2xl"></i>
-          </div>
-          <div class="icon">
-            <i class="fa-brands fa-linkedin-in fa-2xl"></i>
-          </div>
-          <div class="icon">
-            <i class="fa-brands fa-facebook-f fa-2xl"></i>
-          </div>
-          <div class="icon">
-            <i class="fa-brands fa-x-twitter fa-2xl"></i>
-          </div>
-        </div>
-
-        <div class="separator">
-          <b>Or</b>
-        </div>
-
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
         <div class="mb-3">
-          <label class="form-label" for="exampleInputEmail1">Email address</label>
-          <input #email="ngModel" [(ngModel)]="authenticationRequest.email" aria-describedby="emailHelp"
-                 class="form-control"
-                 email
-                 id="exampleInputEmail1" name="email" placeholder="john@example.com"
-                 required type="email">
-          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
-            <div *ngIf="email.errors?.['required']" class="inv-feedback">Email is required.</div>
-            <div *ngIf="email.errors?.['email']" class="inv-feedback">Input should be an email.</div>
-          </div>
+          <label class="form-label" for="exampleInputEmail1">Email: </label>
+          <input aria-describedby="emailHelp" [formControlName]="'username'" class="form-control" id="exampleInputEmail1"
+                 placeholder="janpieter@mail.com" type="email">
         </div>
         <div class="mb-3">
-          <label class="form-label" for="exampleInputPassword1">Password</label>
-          <input #password="ngModel" [(ngModel)]="authenticationRequest.password" class="form-control"
-                 id="exampleInputPassword1" name="password" placeholder="*********"
-                 type="password">
-          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
-            <div *ngIf="password.errors?.['required']" class="inv-feedback">Password is required.</div>
+          <label class="form-label" for="password">Password: </label>
+          <div class="input-group">
+            <input [formControlName]="'password'" [type]="fieldTextType ? 'text' : 'password'" class="form-control"
+                   id="password" placeholder="********">
+            <span class="input-group-text">
+              <i (click)="toggleFieldTextType()" [ngClass]="{'fa-eye-slash': !fieldTextType, 'fa-eye': fieldTextType}"
+                 class="fa"></i>
+            </span>
           </div>
         </div>
-        <button (click)="nextStep()" [disabled]="email.invalid || password.invalid" class="btn" name="button"
-                type="submit">
-          Login
-        </button>
-        <br>
-        <br>
-        <a [routerLink]="'../register'">Don't have an account yet? Go to the Register page</a>
+        <p>Forgot password? <a routerLink="/auth/reset/password">Get a new one</a></p>
+        <button class="btn" type="submit">Login</button>
       </form>
+<!--      <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">-->
+<!--        <h2>Login</h2>-->
+<!--        &lt;!&ndash;        <div class="socialIcons mt-4">&ndash;&gt;-->
+<!--        &lt;!&ndash;          <div class="icon">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <i class="fa-brands fa-google fa-2xl"></i>&ndash;&gt;-->
+<!--        &lt;!&ndash;          </div>&ndash;&gt;-->
+<!--        &lt;!&ndash;          <div class="icon">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <i class="fa-brands fa-linkedin-in fa-2xl"></i>&ndash;&gt;-->
+<!--        &lt;!&ndash;          </div>&ndash;&gt;-->
+<!--        &lt;!&ndash;          <div class="icon">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <i class="fa-brands fa-facebook-f fa-2xl"></i>&ndash;&gt;-->
+<!--        &lt;!&ndash;          </div>&ndash;&gt;-->
+<!--        &lt;!&ndash;          <div class="icon">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <i class="fa-brands fa-x-twitter fa-2xl"></i>&ndash;&gt;-->
+<!--        &lt;!&ndash;          </div>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
+
+<!--        &lt;!&ndash;        <div class="separator">&ndash;&gt;-->
+<!--        &lt;!&ndash;          <b>Or</b>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
+
+<!--        <div class="mb-3">-->
+<!--          <label class="form-label" for="exampleInputEmail1">Email address</label>-->
+<!--          <input [formControlName]="'username'" aria-describedby="emailHelp" class="form-control"-->
+<!--                 id="exampleInputEmail1" name="username">-->
+<!--          &lt;!&ndash;          <input #email="ngModel"&ndash;&gt;-->
+<!--          &lt;!&ndash;                 [(ngModel)]="loginPayload.username"&ndash;&gt;-->
+<!--          &lt;!&ndash;                 aria-describedby="emailHelp" class="form-control" id="exampleInputEmail1" name="username"&ndash;&gt;-->
+<!--          &lt;!&ndash;                 placeholder="john@example.com" required type="email">&ndash;&gt;-->
+<!--          &lt;!&ndash;          <div *ngIf="this.email.invalid && (email.dirty || email.touched)" class="alert">&ndash;&gt;-->
+<!--          &lt;!&ndash;            <div *ngIf="email.errors?.['required']" class="inv-feedback">Email is required.</div>&ndash;&gt;-->
+<!--          &lt;!&ndash;            <div *ngIf="email.errors?.['email']" class="inv-feedback">Input should be an email.</div>&ndash;&gt;-->
+<!--          &lt;!&ndash;          </div>&ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="mb-3">-->
+<!--          <label class="form-label" for="exampleInputPassword1">Password</label>-->
+<!--          <input type="password" class="form-control" id="exampleInputPassword1" name="password" [formControlName]="'password'">-->
+<!--&lt;!&ndash;          <input #password="ngModel"&ndash;&gt;-->
+<!--&lt;!&ndash;                 [(ngModel)]="loginPayload.password"&ndash;&gt;-->
+<!--&lt;!&ndash;                 class="form-control" id="exampleInputPassword1" name="password"&ndash;&gt;-->
+<!--&lt;!&ndash;                 placeholder="*********" type="password">&ndash;&gt;-->
+<!--&lt;!&ndash;          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div *ngIf="password.errors?.['required']" class="inv-feedback">Password is required.</div>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--        </div>-->
+<!--        <button class="btn" name="button"-->
+<!--                type="submit">-->
+<!--          Login-->
+<!--        </button>-->
+<!--        <br>-->
+<!--        <br>-->
+<!--        <a routerLink="../register">Don't have an account yet? Go to the Register page</a>-->
+<!--      </form>-->
     </div>
     <div class="col-8">
       <img alt="" src="./assets/img/brandAssets/Transparent/PNG/Logo/Logo%203.png">
@@ -58,25 +81,4 @@
   </div>
 </div>
 
-<div *ngIf="registrationStep === 2" class="container">
-  <div class="row">
-    <img alt="" class="logo" src="./assets/img/brandAssets/Transparent/PNG/Logo/Logo%201.png">
 
-    <div class="col-12">
-      <div class="card">
-        <div class="card-body">
-          <h2>Two-Factor Authentication</h2>
-          <div class="mb-3">
-            <label class="form-label" for="exampleInputQrcode1">Enter the 6-digit number generated by your app:</label>
-            <input #otpCodes="ngModel" [(ngModel)]="otpCode" minlength="6" aria-describedby="qrCodeHelp" class="form-control" id="exampleInputQrcode1"
-                   name="validationCode" required type="number">
-            <div *ngIf="otpCodes.invalid && (otpCodes.dirty || otpCodes.touched)" class="alert">
-              <div *ngIf="otpCodes.errors?.['required']" class="inv-feedback">Password is required.</div>
-            </div>
-            <button (click)="verifyCode()" [disabled]="otpCodes.invalid" class="btn">Verify code</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
