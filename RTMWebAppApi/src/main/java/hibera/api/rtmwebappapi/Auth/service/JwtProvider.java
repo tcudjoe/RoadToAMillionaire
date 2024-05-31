@@ -21,7 +21,7 @@ public class JwtProvider {
     public void init() {
         try {
             keyStore = KeyStore.getInstance("JKS");
-            InputStream resourceAsStream = getClass().getResourceAsStream("/hibera.jks");
+            InputStream resourceAsStream = getClass().getResourceAsStream("/rtmapplication.jks");
             keyStore.load(resourceAsStream, "keystore".toCharArray());
         } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException e) {
             throw new HiberaException("Exception occurred while loading keystore");
@@ -37,7 +37,7 @@ public class JwtProvider {
 
     private PublicKey getPublicKey() {
         try {
-            return keyStore.getCertificate("hibera").getPublicKey();
+            return keyStore.getCertificate("rtmapplication").getPublicKey();
         }catch (KeyStoreException e){
             throw new HiberaException("Exception occured while retrieving public key from keystore");
         }
@@ -54,7 +54,7 @@ public class JwtProvider {
 
     private Key getPrivateKey() {
         try {
-            return keyStore.getKey("hibera", "keystore".toCharArray());
+            return keyStore.getKey("rtmapplication", "keystore".toCharArray());
         } catch (KeyStoreException | NoSuchAlgorithmException | UnrecoverableKeyException e) {
             throw new HiberaException("Exception occured while retrieving public key from keystore");
         }
