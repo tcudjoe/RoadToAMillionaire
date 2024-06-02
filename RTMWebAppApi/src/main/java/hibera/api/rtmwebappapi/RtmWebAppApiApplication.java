@@ -1,7 +1,17 @@
 package hibera.api.rtmwebappapi;
 
+import com.mailjet.client.ClientOptions;
+import com.mailjet.client.MailjetClient;
+import com.mailjet.client.MailjetRequest;
+import com.mailjet.client.MailjetResponse;
+import com.mailjet.client.errors.MailjetException;
+import com.mailjet.client.errors.MailjetSocketTimeoutException;
+import com.mailjet.client.resource.Emailv31;
 import hibera.api.rtmwebappapi.domain.dto.RegisterRequest;
 import hibera.api.rtmwebappapi.Auth.service.AuthService;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +24,8 @@ import static hibera.api.rtmwebappapi.domain.Role.*;
 @EnableJpaRepositories
 public class RtmWebAppApiApplication {
 
-	public static void main(String[] args) {
+
+	public static void main(String[] args) throws MailjetSocketTimeoutException, MailjetException {
 		SpringApplication.run(RtmWebAppApiApplication.class, args);
 	}
 	@Bean

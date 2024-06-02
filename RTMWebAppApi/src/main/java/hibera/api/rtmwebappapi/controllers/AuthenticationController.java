@@ -29,4 +29,10 @@ public class AuthenticationController {
     public AuthenticationResponse login(@RequestBody LoginRequest request) {
         return authService.login(request);
     }
+
+    @GetMapping("/verify")
+    public ResponseEntity verifyUser(@RequestParam("token") String token) {
+        String result = authService.verifyUser(token);
+        return ResponseEntity.ok(result);
+    }
 }

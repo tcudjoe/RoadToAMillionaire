@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +29,8 @@ public class AuthService {
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtProvider jwtProvider;
+    @Autowired
+    private MailService emailService;
 
     public void register(RegisterRequest request) {
         User user = new User();
@@ -37,7 +40,15 @@ public class AuthService {
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         user.setRole(Role.USER);
+        user.setVerified(false);
+
+        String verificationToken = UUID.randomUUID().toString();
+        user.setVerificationToken(verificationToken);
+
         userRepository.save(user);
+
+        String verificationUrl = "http://localhost:8080/api/auth/verify?token=" + verificationToken;
+        emailService.sendVerificationEmail(user.getEmail(), verificationUrl);
     }
 
     private String encodePassword(String password) {
@@ -56,6 +67,20 @@ public class AuthService {
         org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         return Optional.of(principal);
+    }
+
+    public String verifyUser(String token) {
+        User user = userRepository.findByVerificationToken(token);
+
+        if (user == null) {
+            return "Invalid verification token.";
+        }
+
+        user.setVerified(true);
+        user.setVerificationToken(null);
+        userRepository.save(user);
+
+        return "Your email has been verified. You can now log in.";
     }
 
 //    public Optional<Object> getCurrentUserName() {
