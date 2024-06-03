@@ -92,7 +92,7 @@ public class AuthService {
         user.setResetPasswordToken(token);
         userRepository.save(user);
 
-        emailService.sendPasswordResetEmail(String.valueOf(user), token);
+        emailService.sendPasswordResetEmail(user.getEmail(), token);
     }
 
     public void resetPassword(ResetPasswordRequest request) {
