@@ -5,6 +5,7 @@ import hibera.api.rtmwebappapi.domain.dto.LoginRequest;
 import hibera.api.rtmwebappapi.domain.dto.RegisterRequest;
 import hibera.api.rtmwebappapi.domain.Role;
 import hibera.api.rtmwebappapi.domain.User;
+import hibera.api.rtmwebappapi.domain.dto.ResetPasswordRequest;
 import hibera.api.rtmwebappapi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,7 +85,27 @@ public class AuthService {
         return "Your email has been verified. You can now log in.";
     }
 
-//    public Optional<Object> getCurrentUserName() {
-//
-//    }
+    public void resetPasswordRequest(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found exception"));
+        String token = UUID.randomUUID().toString();
+
+        user.setResetPasswordToken(token);
+        userRepository.save(user);
+
+        emailService.sendPasswordResetEmail(String.valueOf(user), token);
+    }
+
+    public void resetPassword(ResetPasswordRequest request) {
+        User user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> new RuntimeException("User not found exception"));
+
+        if (user.getResetPasswordToken().equals(request.getToken())) {
+            user.setPassword(passwordEncoder.encode(request.getPassword()));
+            user.setResetPasswordToken(null);
+            userRepository.save(user);
+        } else {
+            throw new RuntimeException("token is not valid to reset password");
+        }
+    }
+
+
 }
