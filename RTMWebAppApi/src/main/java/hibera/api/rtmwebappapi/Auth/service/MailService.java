@@ -4,37 +4,43 @@ import com.mailjet.client.ClientOptions;
 import com.mailjet.client.MailjetClient;
 import com.mailjet.client.MailjetRequest;
 import com.mailjet.client.MailjetResponse;
-import com.mailjet.client.errors.MailjetException;
-import com.mailjet.client.errors.MailjetSocketTimeoutException;
 import com.mailjet.client.resource.Emailv31;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MailService {
+
     @Value("${mailjet.apiKey}")
-    private static String apiKey= "293e75c07c9fab8172f14c657e5bfca3";
+    private String apiKey;
 
     @Value("${mailjet.apiSecret}")
-    private static String apiSecret = "2361127bdd3bb225834cded879020c0a";
+    private String apiSecret;
 
-    public void sendVerificationEmail(String toEmail, String verificationUrl) {
+    @Value("${from.email.url}")
+    private String fromEmail;
+
+    @Value("${app.frontend.url}")
+    private String frontendUrl;
+
+    public void sendVerificationEmail(String toEmail, String token) {
+        String verificationUrl = frontendUrl + "/auth/confirm-email?token=" + token;
+
         MailjetClient client = new MailjetClient(apiKey, apiSecret, new ClientOptions("v3.1"));
         MailjetRequest request = new MailjetRequest(Emailv31.resource)
                 .property(Emailv31.MESSAGES, new JSONArray()
                         .put(new JSONObject()
                                 .put(Emailv31.Message.FROM, new JSONObject()
-                                        .put("Email", "tyra@hibera-agency.com")
+                                        .put("Email", fromEmail)
                                         .put("Name", "RTM"))
                                 .put(Emailv31.Message.TO, new JSONArray()
                                         .put(new JSONObject()
                                                 .put("Email", toEmail)))
-                                .put(Emailv31.Message.SUBJECT, "Please verify your email")
-                                .put(Emailv31.Message.TEXTPART, "Please verify your email by clicking the link: " + verificationUrl)
-                                .put(Emailv31.Message.HTMLPART, "<p>Please verify your email by clicking the link: <a href='" + verificationUrl + "'>Verify Email</a></p>")));
+                                .put(Emailv31.Message.SUBJECT, "RTM - Please verify your email 💙")
+                                .put(Emailv31.Message.TEXTPART, "Hi there👋 You recently registered to RTM. We need you to verify your email!")
+                                .put(Emailv31.Message.HTMLPART, "<p>Hi there👋 You recently registered to RTM. We need you to verify your email by clicking the link: <a href='" + verificationUrl + "'>Verify Email</a></p>")));
         try {
             MailjetResponse response = client.post(request);
             System.out.println(response.getStatus());
@@ -42,5 +48,8 @@ public class MailService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void sendPasswordResetEmail(String toEmail, String token) {
     }
 }

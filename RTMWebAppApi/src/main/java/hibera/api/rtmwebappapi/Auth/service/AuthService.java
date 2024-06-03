@@ -35,20 +35,21 @@ public class AuthService {
     public void register(RegisterRequest request) {
         User user = new User();
         user.setUsername(request.getEmail());
-        user.setPassword(encodePassword(request.getPassword()));
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setEmail(request.getEmail());
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         user.setRole(Role.USER);
-        user.setVerified(false);
 
-        String verificationToken = UUID.randomUUID().toString();
-        user.setVerificationToken(verificationToken);
+        // Generate a unique token
+        String token = UUID.randomUUID().toString();
 
+        // Save the token with the user (if needed)
+        user.setVerificationToken(token);
         userRepository.save(user);
 
-        String verificationUrl = "http://localhost:8080/api/auth/verify?token=" + verificationToken;
-        emailService.sendVerificationEmail(user.getEmail(), verificationUrl);
+        // Send verification email
+        emailService.sendVerificationEmail(user.getEmail(), token);
     }
 
     private String encodePassword(String password) {
