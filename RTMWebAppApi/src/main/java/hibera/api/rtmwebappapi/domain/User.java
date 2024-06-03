@@ -26,6 +26,9 @@ public class User implements UserDetails {
     private String firstName;
     private String lastName;
     private String secret;
+    private boolean isVerified;
+    private String verificationToken;
+    private String resetPasswordToken;
     @Enumerated(EnumType.STRING)
     private Role role;
     @OneToMany(mappedBy = "user")

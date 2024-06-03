@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from "./pages/login/login.component";
 import {RegisterComponent} from "./pages/register/register.component";
 import {ResetPasswordComponent} from "./pages/reset-password/reset-password.component";
+import {ConfirmEmailComponent} from "./pages/confirm-email/confirm-email.component";
 
 const routes: Routes = [
   {
@@ -15,6 +16,11 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
     title: 'RTM | Register'
+  },
+  {
+    path: 'confirm-email',
+    component: ConfirmEmailComponent,
+    title: 'RTM | Confirm Email'
   },
   {
     path: 'password-reset',

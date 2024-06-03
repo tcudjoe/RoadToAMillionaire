@@ -5,6 +5,7 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
 import { RegisterComponent } from './pages/register/register.component';
 import {AuthRoutingModule} from "./auth-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { ConfirmEmailComponent } from './pages/confirm-email/confirm-email.component';
 
 
 
@@ -12,7 +13,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
   declarations: [
     LoginComponent,
     ResetPasswordComponent,
-    RegisterComponent
+    RegisterComponent,
+    ConfirmEmailComponent
   ],
     imports: [
         CommonModule,

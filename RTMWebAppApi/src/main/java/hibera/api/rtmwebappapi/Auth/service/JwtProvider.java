@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import jakarta.annotation.PostConstruct;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.io.InputStream;
 import java.security.*;
 import java.security.cert.CertificateException;
 
+@Component
 @Service
 public class JwtProvider {
     private KeyStore keyStore;
@@ -21,7 +23,7 @@ public class JwtProvider {
     public void init() {
         try {
             keyStore = KeyStore.getInstance("JKS");
-            InputStream resourceAsStream = getClass().getResourceAsStream("/rtmapplication.jks");
+            InputStream resourceAsStream = getClass().getResourceAsStream("rtm.jks");
             keyStore.load(resourceAsStream, "keystore".toCharArray());
         } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException e) {
             throw new HiberaException("Exception occurred while loading keystore");
