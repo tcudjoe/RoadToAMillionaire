@@ -9,16 +9,17 @@ import com.mailjet.client.errors.MailjetSocketTimeoutException;
 import com.mailjet.client.resource.Emailv31;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MailService {
     @Value("${mailjet.apiKey}")
-    private static String apiKey;
+    private static String apiKey= "293e75c07c9fab8172f14c657e5bfca3";
 
     @Value("${mailjet.apiSecret}")
-    private static String apiSecret;
+    private static String apiSecret = "2361127bdd3bb225834cded879020c0a";
 
     public void sendVerificationEmail(String toEmail, String verificationUrl) {
         MailjetClient client = new MailjetClient(apiKey, apiSecret, new ClientOptions("v3.1"));
