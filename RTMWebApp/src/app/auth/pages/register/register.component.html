@@ -1,0 +1,84 @@
+
+<div *ngIf="message" aria-atomic="true" aria-live="assertive" class="toast" role="alert">
+  <button aria-label="Close" class="btn-close" data-bs-dismiss="toast" type="button"></button>
+  <div class="toast-body">
+    {{ message }}
+  </div>
+</div>
+
+<!-- Registration Form Step 1 -->
+<div class="container-fluid step1" *ngIf="registrationStep === 1">
+  <div class="row">
+    <div class="col-8">
+      <img alt="RTM Logo" src="./assets/img/brandAssets/Transparent/PNG/Logo/Logo%203.png">
+    </div>
+    <div class="col-4">
+      <form (ngSubmit)="nextStep()" #step1Form="ngForm">
+        <h2>Register</h2>
+
+        <div class="mb-3">
+          <label class="form-label" for="email">Email address</label>
+          <input [(ngModel)]="registerPayload.email" #email="ngModel" name="email" id="email" class="form-control" placeholder="john@example.com" required email>
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
+            <div *ngIf="email.errors?.['required']" class="inv-feedback">Email is required.</div>
+            <div *ngIf="email.errors?.['email']" class="inv-feedback">Input should be an email.</div>
+          </div>
+        </div>
+        <button type="submit" class="btn" [disabled]="email.invalid">Continue</button>
+        <br>
+        <br>
+        <a [routerLink]="'../login'">Have an account already? Go to the Login page</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Registration Form Step 2 -->
+<div class="container-fluid" *ngIf="registrationStep === 2">
+  <div class="row">
+    <div class="col-12">
+      <img alt="RTM Logo" src="./assets/img/brandAssets/Transparent/PNG/Logo/Logo%201.png">
+    </div>
+    <div class="col-12 step2">
+      <div class="card">
+        <div class="card-body">
+          <a (click)="prevStep()">
+            <svg height="16" viewBox="0 0 320 512" width="10" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/>
+            </svg>
+            Back
+          </a>
+          <h2>Let’s get you started</h2>
+          <p>Begin by creating an account</p>
+          <form (ngSubmit)="registerUser()" #step2Form="ngForm">
+            <div class="row">
+              <div class="mb-3 col">
+                <label class="form-label" for="firstname">First name</label>
+                <input [(ngModel)]="registerPayload.firstName" #firstname="ngModel" name="firstName" id="firstname" class="form-control" placeholder="John" required>
+                <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="alert">
+                  <div *ngIf="firstname.errors?.['required']" class="inv-feedback">Firstname is required.</div>
+                </div>
+              </div>
+              <div class="mb-3 col">
+                <label class="form-label" for="surname">Surname</label>
+                <input [(ngModel)]="registerPayload.lastName" #surname="ngModel" name="lastName" id="surname" class="form-control" placeholder="Doe" required>
+                <div *ngIf="surname.invalid && (surname.dirty || surname.touched)" class="alert">
+                  <div *ngIf="surname.errors?.['required']" class="inv-feedback">Surname is required.</div>
+                </div>
+              </div>
+            </div>
+            <div class="mb-5">
+              <label class="form-label" for="password">Password</label>
+              <input [(ngModel)]="registerPayload.password" #password="ngModel" name="password" id="password" class="form-control" placeholder="*********" required minlength="8" type="password">
+              <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
+                <div *ngIf="password.errors?.['required']" class="inv-feedback">Password is required.</div>
+                <div *ngIf="password.errors?.['minlength']" class="inv-feedback">Password should have a minimum of 8 characters.</div>
+              </div>
+            </div>
+            <button type="submit" class="btn" [disabled]="firstname.invalid || surname.invalid || password.invalid">Sign up</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

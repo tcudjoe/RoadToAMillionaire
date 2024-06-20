@@ -1,0 +1,73 @@
+@import "src/scss/variables";
+
+footer {
+  background-color: $primary;
+
+  .container-fluid {
+    padding: 75px 75px;
+
+    .col-5 {
+      padding-right: 150px;
+
+      p {
+        padding: 10px 0;
+        font-size: 18px;
+        color: $grey;
+      }
+    }
+
+    ul {
+      text-decoration: none;
+      list-style: none;
+      margin-left: -$p;
+
+      li {
+        padding: 3px 0;
+
+        a {
+          color: $grey !important;
+          transition: 300ms;
+          font-size: 18px;
+        }
+      }
+
+      li a:hover {
+        color: $white-20 !important;
+      }
+    }
+
+    h3 {
+      color: $white-20;
+    }
+
+    i {
+      color: #ECF0EE;
+      font-size: 24px;
+    }
+
+    img {
+      width: 205px;
+
+    }
+  }
+
+
+}
+
+@media only screen and (max-width: 576px) {
+}
+
+@media only screen and (min-width: 576px) {
+}
+
+@media only screen and (min-width: 768px) {
+}
+
+@media only screen and (min-width: 992px) {
+}
+
+@media only screen and (min-width: 1200px) {
+}
+
+@media only screen and (min-width: 1400px) {
+}
