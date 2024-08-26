@@ -1,4 +1,4 @@
-package hibera.api.rtmwebappapi.Auth.service;
+package hibera.api.rtmwebappapi.Auth.service.mail;
 
 import com.mailjet.client.ClientOptions;
 import com.mailjet.client.MailjetClient;
@@ -24,6 +24,7 @@ public class MailService {
 
     @Value("${app.frontend.url}")
     private String frontendUrl;
+
 
     public void sendVerificationEmail(String toEmail, String token) {
         String verificationUrl = frontendUrl + "/auth/confirm-email?token=" + token;

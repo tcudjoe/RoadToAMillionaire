@@ -1,5 +1,6 @@
 package hibera.api.rtmwebappapi.Auth.service;
 
+import hibera.api.rtmwebappapi.Auth.service.mail.MailService;
 import hibera.api.rtmwebappapi.domain.dto.AuthenticationResponse;
 import hibera.api.rtmwebappapi.domain.dto.LoginRequest;
 import hibera.api.rtmwebappapi.domain.dto.RegisterRequest;
