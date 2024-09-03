@@ -122,6 +122,11 @@
             <version>3.9.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.stripe</groupId>
+            <artifactId>stripe-java</artifactId>
+            <version>23.5.0</version>
+        </dependency>
     </dependencies>
 
     <build>

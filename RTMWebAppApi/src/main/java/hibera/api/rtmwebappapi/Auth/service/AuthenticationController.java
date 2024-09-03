@@ -1,17 +1,14 @@
-package hibera.api.rtmwebappapi.controllers;
+package hibera.api.rtmwebappapi.Auth.service;
 
 import hibera.api.rtmwebappapi.domain.dto.AuthenticationResponse;
 import hibera.api.rtmwebappapi.domain.dto.LoginRequest;
 import hibera.api.rtmwebappapi.domain.dto.RegisterRequest;
-import hibera.api.rtmwebappapi.Auth.service.AuthService;
 import hibera.api.rtmwebappapi.domain.dto.ResetPasswordRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
