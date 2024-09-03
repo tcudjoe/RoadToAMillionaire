@@ -9,6 +9,7 @@ import {environment} from "../../../../environments/environment";
   styleUrls: ['./confirm-email.component.scss']
 })
 export class ConfirmEmailComponent implements OnInit {
+  verificationFailed: boolean | undefined;
 
   constructor(private route: ActivatedRoute,
               private http: HttpClient,
@@ -32,10 +33,12 @@ export class ConfirmEmailComponent implements OnInit {
       .subscribe(
         response => {
           // handle successful verification
+          this.verificationFailed = false;
           console.log('Email verified successfully', response);
           this.router.navigate(['/auth/login']); // Redirect to login or another page
         },
         error => {
+          this.verificationFailed = true;
           // handle verification error
           console.error('Email verification failed', error);
         }
