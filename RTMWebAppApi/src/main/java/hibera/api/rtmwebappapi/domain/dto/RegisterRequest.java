@@ -1,6 +1,6 @@
 package hibera.api.rtmwebappapi.domain.dto;
 
-import hibera.api.rtmwebappapi.domain.Role;
+import hibera.api.rtmwebappapi.domain.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package hibera.api.rtmwebappapi.domain;
+package hibera.api.rtmwebappapi.domain.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static hibera.api.rtmwebappapi.domain.Permissions.*;
+import static hibera.api.rtmwebappapi.domain.enums.Permissions.*;
 
 @RequiredArgsConstructor
 public enum Role {

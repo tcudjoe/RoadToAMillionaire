@@ -1,4 +1,4 @@
-package hibera.api.rtmwebappapi.domain;
+package hibera.api.rtmwebappapi.domain.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

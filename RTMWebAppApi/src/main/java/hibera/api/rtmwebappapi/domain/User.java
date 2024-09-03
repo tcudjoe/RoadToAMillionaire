@@ -1,10 +1,12 @@
 package hibera.api.rtmwebappapi.domain;
 
+import hibera.api.rtmwebappapi.domain.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -19,12 +21,13 @@ import java.util.List;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long user_id;
+    private String firstName;
+    private String lastName;
     private String username;
     private String email;
     private String password;
-    private String firstName;
-    private String lastName;
+    private String phonenumber;
     private String secret;
     private boolean isVerified;
     private String verificationToken;
@@ -33,6 +36,10 @@ public class User implements UserDetails {
     private Role role;
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
+    private LocalDateTime user_creation_date;
+    @ManyToOne
+    @JoinColumn(name = "company_id", nullable = false)
+    private Company company;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -17,8 +17,8 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
-import static hibera.api.rtmwebappapi.domain.Permissions.*;
-import static hibera.api.rtmwebappapi.domain.Role.*;
+import static hibera.api.rtmwebappapi.domain.enums.Permissions.*;
+import static hibera.api.rtmwebappapi.domain.enums.Role.*;
 import static org.springframework.http.HttpMethod.*;
 
 @Configuration

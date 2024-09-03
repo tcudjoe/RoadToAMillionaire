@@ -4,7 +4,7 @@ import hibera.api.rtmwebappapi.Auth.service.mail.MailService;
 import hibera.api.rtmwebappapi.domain.dto.AuthenticationResponse;
 import hibera.api.rtmwebappapi.domain.dto.LoginRequest;
 import hibera.api.rtmwebappapi.domain.dto.RegisterRequest;
-import hibera.api.rtmwebappapi.domain.Role;
+import hibera.api.rtmwebappapi.domain.enums.Role;
 import hibera.api.rtmwebappapi.domain.User;
 import hibera.api.rtmwebappapi.domain.dto.ResetPasswordRequest;
 import hibera.api.rtmwebappapi.repository.UserRepository;
