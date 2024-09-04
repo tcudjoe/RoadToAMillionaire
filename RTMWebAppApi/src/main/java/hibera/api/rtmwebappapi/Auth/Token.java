@@ -1,6 +1,7 @@
-package hibera.api.rtmwebappapi.domain;
+package hibera.api.rtmwebappapi.Auth;
 
 import hibera.api.rtmwebappapi.domain.enums.TokenType;
+import hibera.api.rtmwebappapi.users.User;
 import jakarta.persistence.*;
 import lombok.*;
 

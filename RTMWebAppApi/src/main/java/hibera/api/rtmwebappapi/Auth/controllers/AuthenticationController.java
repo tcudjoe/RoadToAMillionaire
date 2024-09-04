@@ -1,9 +1,10 @@
-package hibera.api.rtmwebappapi.Auth.service;
+package hibera.api.rtmwebappapi.Auth.controllers;
 
-import hibera.api.rtmwebappapi.domain.dto.AuthenticationResponse;
-import hibera.api.rtmwebappapi.domain.dto.LoginRequest;
-import hibera.api.rtmwebappapi.domain.dto.RegisterRequest;
-import hibera.api.rtmwebappapi.domain.dto.ResetPasswordRequest;
+import hibera.api.rtmwebappapi.Auth.service.AuthService;
+import hibera.api.rtmwebappapi.Auth.AuthenticationResponse;
+import hibera.api.rtmwebappapi.Auth.LoginRequest;
+import hibera.api.rtmwebappapi.Auth.RegisterRequest;
+import hibera.api.rtmwebappapi.Auth.ResetPasswordRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

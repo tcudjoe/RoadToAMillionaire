@@ -1,4 +1,4 @@
-package hibera.api.rtmwebappapi.domain.dto;
+package hibera.api.rtmwebappapi.Auth;
 
 import lombok.*;
 

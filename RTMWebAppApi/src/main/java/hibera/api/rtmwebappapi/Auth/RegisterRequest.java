@@ -1,5 +1,6 @@
-package hibera.api.rtmwebappapi.domain.dto;
+package hibera.api.rtmwebappapi.Auth;
 
+import hibera.api.rtmwebappapi.users.Company;
 import hibera.api.rtmwebappapi.domain.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,5 +17,7 @@ public class RegisterRequest {
     private String email;
     private String username;
     private String password;
+    private Company company;
+    private String phoneNumber;
     private Role role;
 }

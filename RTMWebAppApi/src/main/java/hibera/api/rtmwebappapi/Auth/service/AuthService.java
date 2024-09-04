@@ -1,12 +1,12 @@
 package hibera.api.rtmwebappapi.Auth.service;
 
 import hibera.api.rtmwebappapi.Auth.service.mail.MailService;
-import hibera.api.rtmwebappapi.domain.dto.AuthenticationResponse;
-import hibera.api.rtmwebappapi.domain.dto.LoginRequest;
-import hibera.api.rtmwebappapi.domain.dto.RegisterRequest;
+import hibera.api.rtmwebappapi.Auth.AuthenticationResponse;
+import hibera.api.rtmwebappapi.Auth.LoginRequest;
+import hibera.api.rtmwebappapi.Auth.RegisterRequest;
 import hibera.api.rtmwebappapi.domain.enums.Role;
-import hibera.api.rtmwebappapi.domain.User;
-import hibera.api.rtmwebappapi.domain.dto.ResetPasswordRequest;
+import hibera.api.rtmwebappapi.users.User;
+import hibera.api.rtmwebappapi.Auth.ResetPasswordRequest;
 import hibera.api.rtmwebappapi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -41,6 +42,9 @@ public class AuthService {
         user.setEmail(request.getEmail());
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
+        user.setCompany(request.getCompany());
+        user.setPhonenumber(request.getPhoneNumber());
+        user.setUser_creation_date(LocalDateTime.now());
         user.setRole(Role.USER);
 
         // Generate a unique token

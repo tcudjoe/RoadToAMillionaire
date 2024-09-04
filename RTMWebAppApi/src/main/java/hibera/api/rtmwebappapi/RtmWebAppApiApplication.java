@@ -2,8 +2,10 @@ package hibera.api.rtmwebappapi;
 
 import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.errors.MailjetSocketTimeoutException;
-import hibera.api.rtmwebappapi.domain.dto.RegisterRequest;
+import hibera.api.rtmwebappapi.Auth.RegisterRequest;
 import hibera.api.rtmwebappapi.Auth.service.AuthService;
+import hibera.api.rtmwebappapi.users.service.CompanyService;
+import hibera.api.rtmwebappapi.users.dto.CreateCompanyRequest;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,7 +24,8 @@ public class RtmWebAppApiApplication {
 	}
 	@Bean
 	public CommandLineRunner commandLineRunner(
-			AuthService service
+			AuthService service,
+			CompanyService companyService
 	){
 
 		return args -> {
@@ -49,6 +52,20 @@ public class RtmWebAppApiApplication {
 					.password("test1234")
 					.role(USER)
 					.build();
+
+			var company = CreateCompanyRequest.builder()
+					.company_name("NO COMPANY")
+					.company_address("NO COMPANY")
+					.company_btw_number("NO COMPANY")
+					.company_email("NO COMPANY")
+					.company_kvk_number("NO COMPANY")
+					.company_phonenumber("NO COMPANY")
+					.build();
+
+			companyService.createCompany(company);
+			service.register(admin);
+			service.register(manager);
+			service.register(user);
 		};
 	}
 

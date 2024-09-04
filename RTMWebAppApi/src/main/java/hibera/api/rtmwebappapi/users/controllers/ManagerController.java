@@ -1,4 +1,4 @@
-package hibera.api.rtmwebappapi.controllers;
+package hibera.api.rtmwebappapi.users.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

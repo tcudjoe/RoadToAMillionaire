@@ -1,6 +1,7 @@
 package hibera.api.rtmwebappapi.domain;
 
 import hibera.api.rtmwebappapi.domain.enums.InvoiceType;
+import hibera.api.rtmwebappapi.users.Company;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

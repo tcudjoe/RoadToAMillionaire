@@ -1,5 +1,6 @@
-package hibera.api.rtmwebappapi.domain;
+package hibera.api.rtmwebappapi.users;
 
+import hibera.api.rtmwebappapi.Auth.Token;
 import hibera.api.rtmwebappapi.domain.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
@@ -38,7 +39,7 @@ public class User implements UserDetails {
     private List<Token> tokens;
     private LocalDateTime user_creation_date;
     @ManyToOne
-    @JoinColumn(name = "company_id", nullable = false)
+    @JoinColumn(name = "company_id", nullable = true)
     private Company company;
 
     @Override

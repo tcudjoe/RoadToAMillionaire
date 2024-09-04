@@ -1,7 +1,7 @@
 package hibera.api.rtmwebappapi.stripe;
 
-import hibera.api.rtmwebappapi.domain.Company;
-import hibera.api.rtmwebappapi.domain.User;
+import hibera.api.rtmwebappapi.users.Company;
+import hibera.api.rtmwebappapi.users.User;
 import hibera.api.rtmwebappapi.stripe.enums.PlanInterval;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

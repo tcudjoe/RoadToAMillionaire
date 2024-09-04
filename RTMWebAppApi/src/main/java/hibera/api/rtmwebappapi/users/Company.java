@@ -1,4 +1,4 @@
-package hibera.api.rtmwebappapi.domain;
+package hibera.api.rtmwebappapi.users;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
