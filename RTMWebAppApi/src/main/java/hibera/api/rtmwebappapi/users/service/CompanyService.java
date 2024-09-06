@@ -2,30 +2,68 @@ package hibera.api.rtmwebappapi.users.service;
 
 import hibera.api.rtmwebappapi.repository.CompanyRepository;
 import hibera.api.rtmwebappapi.users.Company;
-import hibera.api.rtmwebappapi.users.dto.CreateCompanyRequest;
-import lombok.RequiredArgsConstructor;
+import hibera.api.rtmwebappapi.users.dto.CompanyRequest;
+import hibera.api.rtmwebappapi.users.dto.CompanyResponse;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
-@RequiredArgsConstructor
 public class CompanyService {
+    private final CompanyRepository companyRepository;
+
     @Autowired
-    CompanyRepository companyRepository;
-
-    public void createCompany(CreateCompanyRequest request) {
-        Company company = new Company();
-        company.setCompany_name(request.getCompany_name());
-        company.setCompany_address(request.getCompany_address());
-        company.setCompany_email(request.getCompany_email());
-        company.setCompany_phonenumber(request.getCompany_phonenumber());
-        company.setCompany_btw_number(request.getCompany_btw_number());
-        company.setCompany_kvk_number(request.getCompany_kvk_number());
-        company.setCompany_creation_date(LocalDateTime.now());
-
-        companyRepository.save(company);
+    public CompanyService(CompanyRepository companyRepository) {
+        this.companyRepository = companyRepository;
     }
 
+    @Transactional
+    public CompanyResponse createCompany(CompanyRequest request) {
+        Company company = new Company();
+        company.setCompanyName(request.getCompanyName());
+        company.setCompanyAddress(request.getCompanyAddress());
+        company.setCompanyEmail(request.getCompanyEmail());
+        company.setCompanyPhonenumber(request.getCompanyPhonenumber());
+        company.setCompanyBtwNumber(request.getCompanyBtwNumber());
+        company.setCompanyKvkNumber(request.getCompanyKvkNumber());
+        company.setCompanyCreationDate(LocalDateTime.now());
+        company.setCompanyLastUpdated(LocalDateTime.now());
+
+        Company savedCompany = companyRepository.save(company);
+
+        return mapToCompanyResponse(savedCompany);
+    }
+
+    @Transactional
+    public CompanyResponse updateCompany(Long id, Company updatedCompany) {
+        return companyRepository.findById(id)
+                .map(company -> {
+                    company.setCompanyName(updatedCompany.getCompanyName());
+                    company.setCompanyAddress(updatedCompany.getCompanyAddress());
+                    company.setCompanyEmail(updatedCompany.getCompanyEmail());
+                    company.setCompanyPhonenumber(updatedCompany.getCompanyPhonenumber());
+                    company.setCompanyBtwNumber(updatedCompany.getCompanyBtwNumber());
+                    company.setCompanyKvkNumber(updatedCompany.getCompanyKvkNumber());
+                    company.setCompanyLastUpdated(LocalDateTime.now());
+
+                    Company updatedEntity = companyRepository.save(company);
+                    return mapToCompanyResponse(updatedEntity);
+                })
+                .orElseThrow(() -> new EntityNotFoundException("Company not found with id " + id));
+    }
+
+    private CompanyResponse mapToCompanyResponse(Company company) {
+        CompanyResponse response = new CompanyResponse();
+        response.setCompanyName(company.getCompanyName());
+        response.setCompanyAddress(company.getCompanyAddress());
+        response.setCompanyEmail(company.getCompanyEmail());
+        response.setCompanyPhonenumber(company.getCompanyPhonenumber());
+        response.setCompanyBtwNumber(company.getCompanyBtwNumber());
+        response.setCompanyKvkNumber(company.getCompanyKvkNumber());
+        response.setCompanyCreationDate(company.getCompanyCreationDate());
+        return response;
+    }
 }

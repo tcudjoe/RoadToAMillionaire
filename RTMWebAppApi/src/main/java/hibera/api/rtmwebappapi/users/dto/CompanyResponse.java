@@ -1,22 +1,17 @@
-package hibera.api.rtmwebappapi.users;
+package hibera.api.rtmwebappapi.users.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Getter
-@Setter
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "companies")
-public class Company {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CompanyResponse {
     private long companyId;
     private String companyName;
     private String companyAddress;
@@ -26,5 +21,4 @@ public class Company {
     private String companyBtwNumber;
     private LocalDateTime companyCreationDate;
     private LocalDateTime companyLastUpdated;
-
 }

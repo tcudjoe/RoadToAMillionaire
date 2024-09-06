@@ -16,12 +16,12 @@ public class StripeController {
     @Autowired
     private StripeService stripeService;
 
-    @PostMapping("/product")
+    @PostMapping("/create/product")
     public Product createProduct(@RequestParam String name, @RequestParam String description) throws StripeException {
         return stripeService.createProduct(name, description);
     }
 
-    @PostMapping("/price")
+    @PostMapping("/create/price")
     public Price createPrice(@RequestParam String productId,
                              @RequestParam long amount,
                              @RequestParam String currency,

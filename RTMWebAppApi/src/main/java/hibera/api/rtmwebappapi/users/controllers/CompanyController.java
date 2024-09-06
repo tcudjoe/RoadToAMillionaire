@@ -1,15 +1,14 @@
 package hibera.api.rtmwebappapi.users.controllers;
 
 import hibera.api.rtmwebappapi.Auth.RegisterRequest;
-import hibera.api.rtmwebappapi.users.dto.CreateCompanyRequest;
+import hibera.api.rtmwebappapi.users.Company;
+import hibera.api.rtmwebappapi.users.dto.CompanyRequest;
+import hibera.api.rtmwebappapi.users.dto.CompanyResponse;
 import hibera.api.rtmwebappapi.users.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/company")
@@ -20,8 +19,17 @@ public class CompanyController {
 
     @PostMapping("create")
 //    @PreAuthorize("hasAnyAuthority('admin:create', 'manager:create', 'user:create')")
-    public ResponseEntity createCompany(@RequestBody CreateCompanyRequest request) {
+    public ResponseEntity createCompany(@RequestBody CompanyRequest request) {
         companyService.createCompany(request);
         return ResponseEntity.ok(request);
     }
+
+    @PutMapping("update/{id}")
+//    @PreAuthorize("hasAnyAuthority('admin:create', 'manager:create', 'user:create')")
+    public ResponseEntity updateCompany(@PathVariable Long id, @RequestBody Company updatedCompany) {
+        CompanyResponse company = companyService.updateCompany(id, updatedCompany);
+        return ResponseEntity.ok(company);
+    }
+
+
 }
