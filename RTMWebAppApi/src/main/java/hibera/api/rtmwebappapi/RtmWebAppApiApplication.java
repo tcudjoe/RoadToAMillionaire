@@ -62,10 +62,10 @@ public class RtmWebAppApiApplication {
 					.company_phonenumber("NO COMPANY")
 					.build();
 
-			companyService.createCompany(company);
-			service.register(admin);
-			service.register(manager);
-			service.register(user);
+//			companyService.createCompany(company);
+//			service.register(admin);
+//			service.register(manager);
+//			service.register(user);
 		};
 	}
 

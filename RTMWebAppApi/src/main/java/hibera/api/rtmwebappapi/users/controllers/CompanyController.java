@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/company")
-@PreAuthorize("hasAnyAuthority('ADMIN', 'MANAGER', 'USER')")
+//@PreAuthorize("hasAnyAuthority('ADMIN', 'MANAGER', 'USER')")
 public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
     @PostMapping("create")
-    @PreAuthorize("hasAnyAuthority('admin:create', 'manager:create')")
+//    @PreAuthorize("hasAnyAuthority('admin:create', 'manager:create', 'user:create')")
     public ResponseEntity createCompany(@RequestBody CreateCompanyRequest request) {
         companyService.createCompany(request);
         return ResponseEntity.ok(request);

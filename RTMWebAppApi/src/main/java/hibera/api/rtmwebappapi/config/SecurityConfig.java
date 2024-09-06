@@ -65,6 +65,13 @@ public class SecurityConfig extends AbstractHttpConfigurer<SecurityConfig, HttpS
                                         .requestMatchers(mvcMatcherBuilder.pattern(PUT, "/api/v1/stripe/**")).hasAnyAuthority(ADMIN_UPDATE.name(), MANAGER_UPDATE.name(), USER_UPDATE.name())
                                         .requestMatchers(mvcMatcherBuilder.pattern(DELETE, "/api/v1/stripe/**")).hasAnyAuthority(ADMIN_DELETE.name(), MANAGER_DELETE.name(), USER_DELETE.name())
 
+                                        .requestMatchers(mvcMatcherBuilder.pattern("/api/v1/company/create"))
+                                        .permitAll()
+//                                        .requestMatchers(mvcMatcherBuilder.pattern(GET, "/api/v1/company/**")).hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name(), USER_READ.name())
+//                                        .requestMatchers(mvcMatcherBuilder.pattern(POST, "/api/v1/company/**")).hasAnyAuthority(ADMIN_CREATE.name(), MANAGER_CREATE.name(), USER_CREATE.name())
+//                                        .requestMatchers(mvcMatcherBuilder.pattern(PUT, "/api/v1/company/**")).hasAnyAuthority(ADMIN_UPDATE.name(), MANAGER_UPDATE.name(), USER_UPDATE.name())
+//                                        .requestMatchers(mvcMatcherBuilder.pattern(DELETE, "/api/v1/company/**")).hasAnyAuthority(ADMIN_DELETE.name(), MANAGER_DELETE.name(), USER_DELETE.name())
+
                                         .anyRequest()
                                         .authenticated()
                 )
