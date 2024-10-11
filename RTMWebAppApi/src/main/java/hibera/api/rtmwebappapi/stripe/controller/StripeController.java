@@ -3,12 +3,12 @@ package hibera.api.rtmwebappapi.stripe.controller;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Price;
 import com.stripe.model.Product;
+import hibera.api.rtmwebappapi.stripe.dto.StripeProductsRequestDTO;
+import hibera.api.rtmwebappapi.stripe.dto.StripeProductsResponseDTO;
 import hibera.api.rtmwebappapi.stripe.service.StripeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/stripe")
@@ -17,8 +17,9 @@ public class StripeController {
     private StripeService stripeService;
 
     @PostMapping("/create/product")
-    public Product createProduct(@RequestParam String name, @RequestParam String description) throws StripeException {
-        return stripeService.createProduct(name, description);
+    public ResponseEntity<StripeProductsResponseDTO> createProduct(@RequestBody StripeProductsRequestDTO products) throws StripeException {
+        StripeProductsResponseDTO response = stripeService.createProduct(products);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/create/price")
