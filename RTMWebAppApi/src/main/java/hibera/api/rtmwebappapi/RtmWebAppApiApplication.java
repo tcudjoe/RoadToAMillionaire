@@ -4,7 +4,7 @@ import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.errors.MailjetSocketTimeoutException;
 import hibera.api.rtmwebappapi.Auth.RegisterRequest;
 import hibera.api.rtmwebappapi.Auth.service.AuthService;
-import hibera.api.rtmwebappapi.users.dto.CompanyRequest;
+import hibera.api.rtmwebappapi.users.dto.CompanyRequestDTO;
 import hibera.api.rtmwebappapi.users.service.CompanyService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -53,7 +53,7 @@ public class RtmWebAppApiApplication {
 					.role(USER)
 					.build();
 
-			var company = CompanyRequest.builder()
+			var company = CompanyRequestDTO.builder()
 					.companyName("NO COMPANY")
 					.companyAddress("NO COMPANY")
 					.companyBtwNumber("NO COMPANY")

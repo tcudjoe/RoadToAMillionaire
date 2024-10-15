@@ -2,8 +2,8 @@ package hibera.api.rtmwebappapi.users.service;
 
 import hibera.api.rtmwebappapi.repository.CompanyRepository;
 import hibera.api.rtmwebappapi.users.Company;
-import hibera.api.rtmwebappapi.users.dto.CompanyRequest;
-import hibera.api.rtmwebappapi.users.dto.CompanyResponse;
+import hibera.api.rtmwebappapi.users.dto.CompanyRequestDTO;
+import hibera.api.rtmwebappapi.users.dto.CompanyResponseDTO;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class CompanyService {
     }
 
     @Transactional
-    public CompanyResponse createCompany(CompanyRequest request) {
+    public CompanyResponseDTO createCompany(CompanyRequestDTO request) {
         Company company = new Company();
         company.setCompanyName(request.getCompanyName());
         company.setCompanyAddress(request.getCompanyAddress());
@@ -38,7 +38,7 @@ public class CompanyService {
     }
 
     @Transactional
-    public CompanyResponse updateCompany(Long id, Company updatedCompany) {
+    public CompanyResponseDTO updateCompany(Long id, Company updatedCompany) {
         return companyRepository.findById(id)
                 .map(company -> {
                     company.setCompanyName(updatedCompany.getCompanyName());
@@ -55,8 +55,8 @@ public class CompanyService {
                 .orElseThrow(() -> new EntityNotFoundException("Company not found with id " + id));
     }
 
-    private CompanyResponse mapToCompanyResponse(Company company) {
-        CompanyResponse response = new CompanyResponse();
+    private CompanyResponseDTO mapToCompanyResponse(Company company) {
+        CompanyResponseDTO response = new CompanyResponseDTO();
         response.setCompanyName(company.getCompanyName());
         response.setCompanyAddress(company.getCompanyAddress());
         response.setCompanyEmail(company.getCompanyEmail());

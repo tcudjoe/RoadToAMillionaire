@@ -11,11 +11,14 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CompanyRequest {
+public class CompanyResponseDTO {
+    private long companyId;
     private String companyName;
     private String companyAddress;
     private String companyPhonenumber;
     private String companyEmail;
     private String companyKvkNumber;
     private String companyBtwNumber;
+    private LocalDateTime companyCreationDate;
+    private LocalDateTime companyLastUpdated;
 }
