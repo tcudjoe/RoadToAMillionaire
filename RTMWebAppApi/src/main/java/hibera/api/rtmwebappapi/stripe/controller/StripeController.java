@@ -29,20 +29,5 @@ public class StripeController {
         return ResponseEntity.ok(response);
     }
 
-//    @PostMapping("/create/price")
-//    public ResponseEntity<PriceResponseDTO> createPrice(@RequestBody PriceRequestDTO priceRequestDTO) throws StripeException {
-//        // Retrieve the product from Stripe using the provided productId
-//        Product stripeProduct = Product.retrieve(priceRequestDTO.getProductId());
-//
-//        // Delegate the price creation to the service
-//        priceService.createStripePrice(
-//                stripeProduct,
-//                priceRequestDTO.getPriceAmount(),
-//                priceRequestDTO.getCurrency(),
-//                priceRequestDTO.getInterval()
-//        );
-//
-//        priceService.createPriceInDB(priceRequestDTO);
-//        return ResponseEntity.ok()
-//    }
+
 }

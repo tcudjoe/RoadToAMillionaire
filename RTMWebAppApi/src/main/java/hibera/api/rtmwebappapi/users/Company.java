@@ -19,12 +19,17 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long companyId;
     private String companyName;
-    private String companyAddress;
+    private String companyAddressLine1;
+    private String companyAddressLine2;
+    private String companyCity;
+    private String companyPostalCode;
+    private String companyCountry;
+    private String companyState;
+    private String companyDescription;
     private String companyPhonenumber;
     private String companyEmail;
     private String companyKvkNumber;
     private String companyBtwNumber;
     private LocalDateTime companyCreationDate;
     private LocalDateTime companyLastUpdated;
-
 }

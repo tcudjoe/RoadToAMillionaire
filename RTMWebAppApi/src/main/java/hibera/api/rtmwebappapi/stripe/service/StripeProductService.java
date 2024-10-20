@@ -13,8 +13,6 @@ import hibera.api.rtmwebappapi.stripe.repository.StripeProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class StripeProductService {
 
@@ -58,17 +56,8 @@ public class StripeProductService {
                         priceDTO.getInterval()
                 );
 
-//                // Save the price to the local database
-//                PriceRequestDTO localPrice = new PriceRequestDTO();
-//                localPrice.setProductId(stripeProductId.getProductId());  // Associate with local product entity
-//                localPrice.setPrice_id(stripePrice.getId());  // Set Stripe price ID
-//                localPrice.setPriceAmount(priceDTO.getPriceAmount());
-//                localPrice.setCurrency(priceDTO.getCurrency());
-//                localPrice.setInterval(priceDTO.getInterval());  // Fix this to use priceDTO interval
-
                 // Save the price to the local DB
                 priceService.createPriceInDB(stripePrice, stripeProductId, priceDTO);
-//                priceService.createPriceInDB(localPrice);
             }
         }
 

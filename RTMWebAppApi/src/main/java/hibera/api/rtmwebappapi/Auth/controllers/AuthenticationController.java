@@ -1,5 +1,6 @@
 package hibera.api.rtmwebappapi.Auth.controllers;
 
+import com.stripe.exception.StripeException;
 import hibera.api.rtmwebappapi.Auth.service.AuthService;
 import hibera.api.rtmwebappapi.Auth.AuthenticationResponse;
 import hibera.api.rtmwebappapi.Auth.LoginRequest;
@@ -21,7 +22,7 @@ public class AuthenticationController {
     private AuthService authService;
 
     @PostMapping("/signup")
-    public ResponseEntity signup(@RequestBody RegisterRequest request) {
+    public ResponseEntity signup(@RequestBody RegisterRequest request) throws StripeException {
         authService.register(request);
         return ResponseEntity.ok(request);
     }

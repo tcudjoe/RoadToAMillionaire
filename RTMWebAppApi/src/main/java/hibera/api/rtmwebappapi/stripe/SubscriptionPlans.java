@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Entity
 @Getter
 @Setter
@@ -23,12 +25,12 @@ public class SubscriptionPlans {
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = true)
     private User user;
-    private String stripe_plan_id;
-    private double plan_amount;
-    private String plan_valuta;
-    private PlanInterval plan_interval;
-    private String plan_description;
-    private boolean plan_active;
+    private String stripePlanId;
+    private String stripePriceId;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
 }

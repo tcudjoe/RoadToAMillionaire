@@ -22,7 +22,7 @@ import java.util.List;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long user_id;
+    private long userId;
     private String firstName;
     private String lastName;
     private String username;
@@ -30,6 +30,14 @@ public class User implements UserDetails {
     private String password;
     private String phonenumber;
     private String secret;
+    private String addressLine1;
+    private String addressLine2;
+    private String city;
+    private String postalCode;
+    private String country;
+    private String state;
+    private String description;
+    private String companyName;
     private boolean isVerified;
     private String verificationToken;
     private String resetPasswordToken;
@@ -37,7 +45,8 @@ public class User implements UserDetails {
     private Role role;
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
-    private LocalDateTime user_creation_date;
+    private LocalDateTime userCreationDate;
+    private LocalDateTime userLastUpdated;
     @ManyToOne
     @JoinColumn(name = "company_id", nullable = true)
     private Company company;

@@ -1,13 +1,17 @@
 package hibera.api.rtmwebappapi.Auth.service;
 
-import hibera.api.rtmwebappapi.Auth.service.mail.MailService;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Customer;
 import hibera.api.rtmwebappapi.Auth.AuthenticationResponse;
 import hibera.api.rtmwebappapi.Auth.LoginRequest;
 import hibera.api.rtmwebappapi.Auth.RegisterRequest;
-import hibera.api.rtmwebappapi.domain.enums.Role;
-import hibera.api.rtmwebappapi.users.User;
 import hibera.api.rtmwebappapi.Auth.ResetPasswordRequest;
+import hibera.api.rtmwebappapi.Auth.service.mail.MailService;
+import hibera.api.rtmwebappapi.domain.enums.Role;
 import hibera.api.rtmwebappapi.repository.UserRepository;
+import hibera.api.rtmwebappapi.stripe.repository.StripeCustomerRepository;
+import hibera.api.rtmwebappapi.stripe.service.StripeCustomerService;
+import hibera.api.rtmwebappapi.users.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,18 +38,37 @@ public class AuthService {
     private JwtProvider jwtProvider;
     @Autowired
     private MailService emailService;
+    @Autowired
+    private StripeCustomerService customerService;
+    @Autowired
+    private StripeCustomerRepository customerRepository;
 
-    public void register(RegisterRequest request) {
+    public void register(RegisterRequest request) throws StripeException {
         User user = new User();
         user.setUsername(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setEmail(request.getEmail());
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
-        user.setCompany(request.getCompany());
         user.setPhonenumber(request.getPhoneNumber());
-        user.setUser_creation_date(LocalDateTime.now());
+        user.setUserCreationDate(LocalDateTime.now());
+        user.setCity(request.getCity());
+        user.setState(request.getState());
+        user.setPostalCode(request.getPostalCode());
+        user.setCompanyName(request.getCompanyName());
+        user.setAddressLine1(request.getAddressLine1());
+        user.setAddressLine2(request.getAddressLine2());
+        user.setCompany(request.getCompanyId());
         user.setRole(Role.USER);
+
+        // Create a Stripe customer
+        Customer stripeCustomer = customerService.createCustomerInStripe(user);
+
+        // Save the user to the db
+        userRepository.save(user);
+
+        // Save the Stripe customer to the db
+        customerService.createStripeCustomerInDb(request, stripeCustomer, user);
 
         // Generate a unique token
         String token = UUID.randomUUID().toString();

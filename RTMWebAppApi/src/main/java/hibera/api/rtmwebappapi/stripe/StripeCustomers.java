@@ -19,15 +19,28 @@ import java.time.LocalDateTime;
 public class StripeCustomers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long customer_id;
+    private long customerId;
     @ManyToOne
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-    private String stripe_customer_id;
-    private String customer_email;
-    private String customer_name;
-    private LocalDateTime customer_creation_date;
+    private String stripeCustomerId;
+    private String customerEmail;
+    private String customerFirstName;
+    private String customerLastName;
+    private String customerPassword;
+    private String customerUsername;
+    private String customerPhoneNumber;
+    private String customerBusinessName;
+    private String customerCity;
+    private String customerState;
+    private String customerCountry;
+    private String customerPostalCode;
+    private String customerAddressLine1;
+    private String customerAddressLine2;
+    private String customerDescription;
+    private LocalDateTime customerCreationDate;
+    private LocalDateTime customerLastUpdated;
 }

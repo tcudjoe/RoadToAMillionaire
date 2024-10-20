@@ -24,7 +24,7 @@ public class CompanyService {
     public CompanyResponseDTO createCompany(CompanyRequestDTO request) {
         Company company = new Company();
         company.setCompanyName(request.getCompanyName());
-        company.setCompanyAddress(request.getCompanyAddress());
+//        company.setCompanyCity(request.get());
         company.setCompanyEmail(request.getCompanyEmail());
         company.setCompanyPhonenumber(request.getCompanyPhonenumber());
         company.setCompanyBtwNumber(request.getCompanyBtwNumber());
@@ -42,7 +42,7 @@ public class CompanyService {
         return companyRepository.findById(id)
                 .map(company -> {
                     company.setCompanyName(updatedCompany.getCompanyName());
-                    company.setCompanyAddress(updatedCompany.getCompanyAddress());
+//                    company.setCompanyAddress(updatedCompany.getCompanyAddress());
                     company.setCompanyEmail(updatedCompany.getCompanyEmail());
                     company.setCompanyPhonenumber(updatedCompany.getCompanyPhonenumber());
                     company.setCompanyBtwNumber(updatedCompany.getCompanyBtwNumber());
@@ -58,7 +58,7 @@ public class CompanyService {
     private CompanyResponseDTO mapToCompanyResponse(Company company) {
         CompanyResponseDTO response = new CompanyResponseDTO();
         response.setCompanyName(company.getCompanyName());
-        response.setCompanyAddress(company.getCompanyAddress());
+//        response.setCompanyAddress(company.getCompanyAddress());
         response.setCompanyEmail(company.getCompanyEmail());
         response.setCompanyPhonenumber(company.getCompanyPhonenumber());
         response.setCompanyBtwNumber(company.getCompanyBtwNumber());
